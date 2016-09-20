@@ -52,16 +52,105 @@ angular.module('starter.services', [])
 .factory('Estados', function() {
   var estados = [{
     id: 0,
-    name: 'Federal',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
+    nome: 'Federal',
+    bandeira: 'img/brasil.png'
   },
   {
-    id: 0,
-    name: 'Federal',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }];
+    id: 1,
+    nome: 'Acre',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 2,
+    nome: 'Alagoas',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 3,
+    nome: 'Amazonas',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 4,
+    nome: 'Amapá',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 5,
+    nome: 'Bahia',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 6,
+    nome: 'Ceará',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 7,
+    nome: 'Espírito Sato',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 8,
+    nome: 'Goiás',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 9,
+    nome: 'Maranhão',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 10,
+    nome: 'Minas Gerais',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 11,
+    nome: 'Mato Grosso do Sul',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 12,
+    nome: 'Mato Grosso',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 13,
+    nome: 'Pará',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 14,
+    nome: 'Paraíba',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 15,
+    nome: 'Pernambuco',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 16,
+    nome: 'Piauí',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 17,
+    nome: 'Paraná',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 18,
+    nome: 'Rio de Janeiro',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 19,
+    nome: 'Rio Grande do Norte',
+    bandeira: 'img/ben.png'
+  }
+  ];
 
   return {
     all: function() {
