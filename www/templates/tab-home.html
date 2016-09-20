@@ -1,0 +1,12 @@
+<ion-view class="tab-estados" view-title="Estados">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="estado in estados" type="item-text-wrap">
+        <img ng-src="{{estado.face}}">
+        {{estado.name}}
+<!--        <p>{{estado.lastText}}</p>-->
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

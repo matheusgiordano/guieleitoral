@@ -47,4 +47,36 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.factory('Estados', function() {
+  var estados = [{
+    id: 0,
+    name: 'Federal',
+    lastText: 'You on your way?',
+    face: 'img/ben.png'
+  },
+  {
+    id: 0,
+    name: 'Federal',
+    lastText: 'You on your way?',
+    face: 'img/ben.png'
+  }];
+
+  return {
+    all: function() {
+      return estados;
+    },
+    remove: function(estado) {
+      estados.splice(estdos.indexOf(estado), 1);
+    },
+    get: function(estadoId) {
+      for (var i = 0; i < estados.length; i++) {
+        if (estados[i].id === parseInt(estadoId)) {
+          return estado[i];
+        }
+      }
+      return null;
+    }
+  };
 });
