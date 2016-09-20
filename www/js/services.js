@@ -58,12 +58,12 @@ angular.module('starter.services', [])
   {
     id: 1,
     nome: 'Acre',
-    bandeira: 'img/ben.png'
+    bandeira: 'img/estados/acre.png'
   },
   {
     id: 2,
     nome: 'Alagoas',
-    bandeira: 'img/ben.png'
+    bandeira: 'img/estados/alagoas.png'
   },
   {
     id: 3,
@@ -87,7 +87,7 @@ angular.module('starter.services', [])
   },
   {
     id: 7,
-    nome: 'Espírito Sato',
+    nome: 'Espírito Santo',
     bandeira: 'img/ben.png'
   },
   {
@@ -102,7 +102,7 @@ angular.module('starter.services', [])
   },
   {
     id: 10,
-    nome: 'Minas Gerais',
+    nome: 'Mato Grosso',
     bandeira: 'img/ben.png'
   },
   {
@@ -112,7 +112,7 @@ angular.module('starter.services', [])
   },
   {
     id: 12,
-    nome: 'Mato Grosso',
+    nome: 'Minas Gerais',
     bandeira: 'img/ben.png'
   },
   {
@@ -127,17 +127,17 @@ angular.module('starter.services', [])
   },
   {
     id: 15,
-    nome: 'Pernambuco',
+    nome: 'Paraná',
     bandeira: 'img/ben.png'
   },
   {
     id: 16,
-    nome: 'Piauí',
+    nome: 'Pernambuco',
     bandeira: 'img/ben.png'
   },
   {
     id: 17,
-    nome: 'Paraná',
+    nome: 'Piauí',
     bandeira: 'img/ben.png'
   },
   {
@@ -149,7 +149,44 @@ angular.module('starter.services', [])
     id: 19,
     nome: 'Rio Grande do Norte',
     bandeira: 'img/ben.png'
+  },
+  {
+    id: 20,
+    nome: 'Rio Grande do Sul',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 21,
+    nome: 'Rondônia',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 22,
+    nome: 'Roraima',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 23,
+    nome: 'Santa Catarina',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 24,
+    nome: 'São Paulo',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 25,
+    nome: 'Sergipe',
+    bandeira: 'img/ben.png'
+  },
+  {
+    id: 26,
+    nome: 'Tocantins',
+    bandeira: 'img/ben.png'
   }
+
+
   ];
 
   return {
