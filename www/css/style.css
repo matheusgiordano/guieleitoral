@@ -1,9 +1,13 @@
-/* Empty. Add your own CSS if you like */
-.tab-estados ion-item{
+.tab-estados ion-item a{
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
 
 .tab-estados ion-item h2{
   line-height: 72px;
+}
+
+.tabs{
+  bottom: 0px !important;
+  position: absolute;
 }
