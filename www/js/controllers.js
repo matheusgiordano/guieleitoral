@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('CargosCtrl', function($scope, $stateParams, Estados) {
+.controller('CargosCtrl', function($scope) {
 //  $scope.estado = Estados.get($stateParams.estadoId);
 });
 

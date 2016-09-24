@@ -68,26 +68,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+    .state('tab.cargos', {
+      url: '/cargos',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/cargos.html',
+          controller: 'CargosCtrl'
+        }
       }
-    }
-  })
-
-  .state('tab.config', {
-    url: '/config',
-    views: {
-      'tab-config': {
-        templateUrl: 'templates/tab-config.html',
-        controller: 'ConfigCtrl'
-      }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
