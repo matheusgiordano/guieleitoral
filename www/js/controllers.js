@@ -25,9 +25,10 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
-
-.controller('CargosCtrl', function($scope) {
+// Aqui segue o teste de conexão com banco
+.controller('CargosCtrl', function($scope, $http) {
 //  $scope.estado = Estados.get($stateParams.estadoId);
-});
+})
+;
 
 
