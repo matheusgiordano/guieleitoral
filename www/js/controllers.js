@@ -25,10 +25,18 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
-// Aqui segue o teste de conexão com banco
+
 .controller('CargosCtrl', function($scope, $http) {
-//  $scope.estado = Estados.get($stateParams.estadoId);
-})
-;
 
+     $scope.countries = [];
 
+     var ajaxRequest = $http.get("http://localhost/countries/getFromDatabase.php");
+
+     ajaxRequest.success(function(data, status, headers, config){
+       $scope.countries = data;
+     });
+
+    ajaxRequest.error(function(data, status, headers, config){
+      alert("AJAX falhou !");
+    });
+});
