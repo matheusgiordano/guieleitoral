@@ -27,9 +27,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CargosCtrl', function($scope, $http) {
-
      $scope.cargos = [];
-
      var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php");
 
      ajaxRequest.success(function(data, status, headers, config){
@@ -40,3 +38,4 @@ angular.module('starter.controllers', [])
       alert("AJAX falhou !");
     });
 });
+
