@@ -28,12 +28,12 @@ angular.module('starter.controllers', [])
 
 .controller('CargosCtrl', function($scope, $http) {
 
-     $scope.countries = [];
+     $scope.cargos = [];
 
-     var ajaxRequest = $http.get("http://localhost/countries/getFromDatabase.php");
+     var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php");
 
      ajaxRequest.success(function(data, status, headers, config){
-       $scope.countries = data;
+       $scope.cargos = data;
      });
 
     ajaxRequest.error(function(data, status, headers, config){
