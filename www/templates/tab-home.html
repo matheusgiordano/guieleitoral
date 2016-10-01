@@ -1,7 +1,7 @@
 <ion-view class="tab-estados" view-title="Estados">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="estado in estados" type="item-text-wrap" href="#/tab/cargos" >
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="estado in estados" type="item-text-wrap" href="#/tab/cargos/{{estado.tipo}}" >
         <img ng-src="{{estado.bandeira}}">
         <h2>{{estado.nome}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
