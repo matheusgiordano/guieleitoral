@@ -1,8 +1,8 @@
-<ion-view view-title="Cargos">
-  <ion-content class="padding">
+<ion-view view-title="Cargos" class="tab-titulo-unico">
+  <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="cargo in cargos" type="item-text-wrap">
-        <h2>{{cargo}}</h2>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="cargo in cargos" type="item-text-wrap" href="">
+        <h2>{{cargo.toString()}}</h2>
       </ion-item>
     </ion-list>
   </ion-content>
