@@ -220,10 +220,10 @@ angular.module('starter.services', [])
     remove: function(estado) {
       estados.splice(estdos.indexOf(estado), 1);
     },
-    get: function(estadoId) {
+    get: function(tipo) {
       for (var i = 0; i < estados.length; i++) {
-        if (estados[i].id === parseInt(estadoId)) {
-          return estado[i];
+        if (estados[i].tipo === tipo) {
+          return estados[i];
         }
       }
       return null;

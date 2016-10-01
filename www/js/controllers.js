@@ -26,8 +26,23 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('CargosCtrl', function($scope) {
-//  $scope.estado = Estados.get($stateParams.estadoId);
+.controller('CargosCtrl', function($scope, $http, $stateParams, Estados) {
+     $scope.estado_clicado = Estados.get($stateParams.estado);
+//     console.log($scope.estado_clicado.tipo);
+     $scope.cargos = [];
+     var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php?tipo="+$scope.estado_clicado.tipo);
+
+     ajaxRequest.success(function(data, status, headers, config){
+       $scope.cargos = data;
+     });
+
+    ajaxRequest.error(function(data, status, headers, config){
+      alert("AJAX falhou !");
+    });
+})
+
+.controller('TelaDecisaoCtrl', function($scope) {
+//  $scope.chat = Chats.get($stateParams.chatId);
 });
 
 
