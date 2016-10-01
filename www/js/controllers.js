@@ -39,5 +39,10 @@ angular.module('starter.controllers', [])
     ajaxRequest.error(function(data, status, headers, config){
       alert("AJAX falhou !");
     });
+})
+
+.controller('TelaDecisaoCtrl', function($scope) {
+//  $scope.chat = Chats.get($stateParams.chatId);
 });
+
 
