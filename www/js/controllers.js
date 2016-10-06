@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
 
 .controller('CargosCtrl', function($scope, $http, $stateParams, Estados) {
      $scope.estado_clicado = Estados.get($stateParams.estado);
-//     console.log($scope.estado_clicado.tipo);
+//     console.log($scope);
      $scope.cargos = [];
      var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php?tipo="+$scope.estado_clicado.tipo);
 
@@ -36,12 +36,22 @@ angular.module('starter.controllers', [])
        $scope.cargos = data;
      });
 
+//    console.log(Object.keys($scope.cargos));
+
     ajaxRequest.error(function(data, status, headers, config){
       alert("AJAX falhou !");
     });
 })
 
-.controller('TelaDecisaoCtrl', function($scope) {
+.controller('TelaDecisaoCtrl', function($scope, $http, $stateParams) {
+    $scope.candidatos = [];
+
+    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php");
+    
+    ajaxRequest.success(function(data, status, headers, config){
+      $scope.candidatos = data;
+    });
+//    console.log($scope);
 //  $scope.chat = Chats.get($stateParams.chatId);
 });
 

@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.tela-decisao', {
-      url: '/tela-decisao',
+      url: '/tela-decisao/:estado/:cargo',
       views: {
         'tab-home': {
           templateUrl: 'templates/tela-decisao.html',
