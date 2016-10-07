@@ -79,6 +79,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'TelaDecisaoCtrl'
         }
       }
+    })
+    .state('tab.lista-comparacao', {
+      url: '/lista-comparacao/:estado/:cargo',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/lista-comparacao.html',
+          controller: 'ListaComparacaoCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

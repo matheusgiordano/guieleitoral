@@ -43,16 +43,24 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('TelaDecisaoCtrl', function($scope, $http, $stateParams) {
+.controller('TelaDecisaoCtrl', function($scope, $stateParams) {
+    $scope.parametros = $stateParams;
+})
+
+.controller('ListaComparacaoCtrl', function($scope, $http, $stateParams){
+    $scope.estado = $stateParams.estado;
+    $scope.cargo  = $stateParams.cargo;
+   
+//    console.log($scope);
     $scope.candidatos = [];
 
-    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php");
-    
+    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php?estado="+$scope.estado+"&cargo=" + $scope.cargo);
+     
     ajaxRequest.success(function(data, status, headers, config){
       $scope.candidatos = data;
     });
-//    console.log($scope);
-//  $scope.chat = Chats.get($stateParams.chatId);
+
+   console.log($scope.candidatos);
 });
 
 
