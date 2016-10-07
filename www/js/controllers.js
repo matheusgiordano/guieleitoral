@@ -60,6 +60,10 @@ angular.module('starter.controllers', [])
       $scope.candidatos = data;
     });
 
+   $scope.candidatos_selecionados = function(){
+     $("#comparar").show();
+   }
+
    console.log($scope.candidatos);
 });
 
