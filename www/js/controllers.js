@@ -60,8 +60,17 @@ angular.module('starter.controllers', [])
       $scope.candidatos = data;
     });
 
+   var count = 0;
+
    $scope.candidatos_selecionados = function(){
-     $("#comparar").show();
+     count = count + 1;
+     if(count == 2){
+       $("#comparar").show();
+     }
+     if(count > 2){
+       alert("Selecione apenas dois candidatos para a comparação !");
+     }
+     console.log(count);
    }
 
    console.log($scope.candidatos);
