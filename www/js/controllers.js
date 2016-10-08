@@ -60,17 +60,16 @@ angular.module('starter.controllers', [])
       $scope.candidatos = data;
     });
 
-   var count = 0;
-
    $scope.candidatos_selecionados = function(){
-     count = count + 1;
-     if(count == 2){
+     var n = $("input:checkbox:checked").length;
+
+     if(n == 2){
        $("#comparar").show();
+       $("input:checkbox").not(":checked").attr("disabled", true);
      }
-     if(count > 2){
-       alert("Selecione apenas dois candidatos para a comparação !");
+     else{
+       $("input:checkbox").not(":checked").attr("disabled", false);
      }
-     console.log(count);
    }
 
    console.log($scope.candidatos);
