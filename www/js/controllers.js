@@ -51,7 +51,6 @@ angular.module('starter.controllers', [])
     $scope.estado = $stateParams.estado;
     $scope.cargo  = $stateParams.cargo;
    
-//    console.log($scope);
     $scope.candidatos = [];
 
     var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php?estado="+$scope.estado+"&cargo=" + $scope.cargo);
@@ -59,6 +58,8 @@ angular.module('starter.controllers', [])
     ajaxRequest.success(function(data, status, headers, config){
       $scope.candidatos = data;
     });
+
+   $scope.candidatos_comparacao = [];
 
    $scope.candidatos_selecionados = function(){
      var n = $("input:checkbox:checked").length;
@@ -72,7 +73,25 @@ angular.module('starter.controllers', [])
      }
    }
 
-   console.log($scope.candidatos);
+   $scope.candidatos_form = function(){
+      var candidatos = [];
+      candidatos = $("input:checkbox:checked").toArray();
+      primeiro_candidato = candidatos[0].value;
+      segundo_candidato = candidatos[1].value;
+      location.href = "#/tab/tabela-comparacao/"+ primeiro_candidato+ "/" + segundo_candidato;
+   }
+})
+
+.controller('TabelaComparacaoCtrl', function($scope, $stateParams, $http){
+  $scope.concorrentes = [$stateParams.primeiro_candidato, $stateParams.segundo_candidato];
+  $scope.cand_concorrentes = [];
+ 
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/comparacao.php?candidatos=" + $scope.concorrentes);
+     
+  ajaxRequest.success(function(data, status, headers, config){
+    $scope.cand_concorrentes = data;
+  });
+
 });
 
 

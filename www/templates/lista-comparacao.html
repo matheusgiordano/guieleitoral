@@ -1,19 +1,23 @@
 <ion-view view-title="Guia Eleitoral">
+  <form name="caras">
   <ion-content>
     <div class="item item-divider">
       Selecione apenas <b>2</b> candidatos para a comparação.
     </div>
-    <ion-list id="lista-comparacao">
+      <ion-list id="lista-comparacao">
 <!--      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in candidatos" type="item-text-wrap" ng-click="candidatos_selecionados()">-->
-        <ion-checkbox ng-model="filter.red" class="item-remove-animate item-avatar item-icone-right" ng-repeat="candidato in candidatos" ng-click="candidatos_selecionados()">
+        <ion-checkbox class="item-remove-animate item-avatar item-icone-right" ng-repeat="candidato in candidatos" ng-click="candidatos_selecionados()" ng-value="{{candidato[0]}}">
           <img ng-src="/img/ben.png">
           <h2>{{candidato[1]}}</h2>
           <h3>Partido</h3>
 <!--      </ion-item>-->
         </ion-checkbox>
     </ion-list>
+   <input type="text" ng-model="caras.candidato" />
+
    </ion-content>
-   <button class="button icon-right ion-ios-play-outline button-balanced" id="comparar" style="display: none;">
+   <button class="button icon-right ion-ios-play-outline button-balanced" id="comparar" style="display: none;" ng-click="candidatos_form(candidato)">
      Comparar
    </button>
+   </form>
 </ion-view>
