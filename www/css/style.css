@@ -22,3 +22,9 @@
 #lista-comparacao .item-checkbox .checkbox{
   left: auto !important;
 }
+
+#tabela-comparativa td{
+  border: 1px solid black;
+  background-color: lightgreen;
+}
+

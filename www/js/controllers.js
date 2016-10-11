@@ -28,7 +28,6 @@ angular.module('starter.controllers', [])
 
 .controller('CargosCtrl', function($scope, $http, $stateParams, Estados) {
      $scope.estado_clicado = Estados.get($stateParams.estado);
-//     console.log($scope);
      $scope.cargos = [];
      var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php?tipo="+$scope.estado_clicado.tipo);
 
@@ -36,7 +35,6 @@ angular.module('starter.controllers', [])
        $scope.cargos = data;
      });
 
-//    console.log(Object.keys($scope.cargos));
 
     ajaxRequest.error(function(data, status, headers, config){
       alert("AJAX falhou !");
@@ -83,15 +81,13 @@ angular.module('starter.controllers', [])
 })
 
 .controller('TabelaComparacaoCtrl', function($scope, $stateParams, $http){
-  $scope.concorrentes = [$stateParams.primeiro_candidato, $stateParams.segundo_candidato];
-  $scope.cand_concorrentes = [];
+  $scope.concorrentes = [];
  
-  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/comparacao.php?candidatos=" + $scope.concorrentes);
-     
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/comparacao.php?primeiro_candidato=" + $stateParams.primeiro_candidato + "&segundo_candidato=" + $stateParams.segundo_candidato);
+  
   ajaxRequest.success(function(data, status, headers, config){
-    $scope.cand_concorrentes = data;
+    $scope.concorrentes = data;
   });
-
 });
 
 
