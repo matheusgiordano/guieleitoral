@@ -2,14 +2,37 @@
   <ion-content class="padding">
     <table id="tabela-comparativa">
       <tr>
-        <td width="120">&nbsp;</td>
-        <td width="100"><b>{{concorrentes[0]}}</b></td>
-        <td width="100"><b>{{concorrentes[1]}}</b></td>
+        <td style="background-color: initial;">&nbsp;</td>
+        <td align="center" class="coluna-fixa">
+          <img ng-src="http://guiaeleitoral.esy.es/imagens/candidatos/{{concorrentes[1].foto}}" class="avatar-tabela">
+          <br/>
+          <b>{{concorrentes[1].nome}}</b>
+        </td>
+        <td align="center" class="coluna-fixa">
+          <img ng-src="http://guiaeleitoral.esy.es/imagens/candidatos/{{concorrentes[1].foto}}" class="avatar-tabela">
+          <br/>
+          <b>{{concorrentes[2].nome}}</b>
+        </td>
       </tr>
       <tr>
-        <td><b>Questão 1</b></td>
+        <td class="coluna-fixa"><b>Questão 1</b></td>
         <td><b>Sim</b></td>
         <td><b>Não</b></td>
+      </tr>
+      <tr>
+        <td class="coluna-fixa"><b>Questão 2</b></td>
+        <td><b>Não</b></td>
+        <td><b>Não</b></td>
+      </tr>
+      <tr>
+        <td class="coluna-fixa"><b>Questão 3</b></td>
+        <td><b>Não</b></td>
+        <td><b>Sim</b></td>
+      </tr>
+      <tr>
+        <td class="coluna-fixa"><b>Questão 4</b></td>
+        <td><b>Sim</b></td>
+        <td><b>Sim</b></td>
       </tr>
     </table>
    </ion-content>

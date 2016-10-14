@@ -87,7 +87,9 @@ angular.module('starter.controllers', [])
   
   ajaxRequest.success(function(data, status, headers, config){
     $scope.concorrentes = data;
+     console.log($scope.concorrentes);
   });
+  
 });
 
 
