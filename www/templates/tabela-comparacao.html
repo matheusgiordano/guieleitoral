@@ -14,26 +14,26 @@
           <b>{{concorrentes[2].nome}}</b>
         </td>
       </tr>
-      <tr>
-        <td class="coluna-fixa"><b>Questão 1</b></td>
-        <td><b>Sim</b></td>
-        <td><b>Não</b></td>
+      <tr ng-repeat="resposta in respostas">
+        <td class="coluna-fixa"><b>{{resposta}}</b></td>
+        <td>
+          <div ng-if="resposta[0] === 1">
+            <b>Sim</b>
+          </div>
+	  <div ng-if="resposta[0] === 0">
+            <b>Não</b>
+          </div>	
+        </td>
+        <td>
+          <div ng-if="resposta[1] === 1">
+            <b>Sim</b>
+          </div>
+	  <div ng-if="resposta[1] === 0">
+            <b>Não</b>
+          </div>
+        </td>
       </tr>
-      <tr>
-        <td class="coluna-fixa"><b>Questão 2</b></td>
-        <td><b>Não</b></td>
-        <td><b>Não</b></td>
-      </tr>
-      <tr>
-        <td class="coluna-fixa"><b>Questão 3</b></td>
-        <td><b>Não</b></td>
-        <td><b>Sim</b></td>
-      </tr>
-      <tr>
-        <td class="coluna-fixa"><b>Questão 4</b></td>
-        <td><b>Sim</b></td>
-        <td><b>Sim</b></td>
-      </tr>
+      </div>
     </table>
    </ion-content>
 </ion-view>

@@ -82,14 +82,24 @@ angular.module('starter.controllers', [])
 
 .controller('TabelaComparacaoCtrl', function($scope, $stateParams, $http){
   $scope.concorrentes = [];
+  $scope.respostas    = [];
  
+  /* Busca dos candidatos comparados */ 
   var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/comparacao.php?primeiro_candidato=" + $stateParams.primeiro_candidato + "&segundo_candidato=" + $stateParams.segundo_candidato);
   
   ajaxRequest.success(function(data, status, headers, config){
     $scope.concorrentes = data;
-     console.log($scope.concorrentes);
   });
+
+  /* Busca das respostas dos candidatos comparados */ 
   
+  var ajaxRequest_respostas = $http.get("http://guiaeleitoral.esy.es/tabela-comparativa.php?primeiro_candidato=" + $stateParams.primeiro_candidato + "&segundo_candidato=" + $stateParams.segundo_candidato);
+
+  ajaxRequest_respostas.success(function(data, status, headers, config){
+    $scope.respostas = data;
+    console.log($scope.respostas);
+  });
+
 });
 
 
