@@ -97,7 +97,6 @@ angular.module('starter.controllers', [])
 
   ajaxRequest_respostas.success(function(data, status, headers, config){
     $scope.respostas = data;
-    console.log($scope.respostas);
   });
 
 });
