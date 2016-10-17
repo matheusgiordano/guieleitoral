@@ -45,3 +45,20 @@
   box-shadow: 3px 3px 5px 0px rgba(85,85,85,1);
   position: relative;
 }
+
+#button-search{
+  z-index:100 !important;
+  right: 5px;
+  position: absolute;
+}
+
+#form-search{
+  position: absolute; 
+  top: 50px; 
+  z-index: 9999; 
+  display: none;
+  width: 100%;
+  background-color: red;
+  padding-right: 5%;
+  padding-left: 5%;
+}
