@@ -111,3 +111,12 @@
 #icon-apagar{
   cursor: pointer;
 }
+
+.perguntas{
+  height: 100px;
+  width: 100%;
+  display: table;
+  float: left;
+}
+
+
