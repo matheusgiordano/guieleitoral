@@ -24,12 +24,19 @@
     </ion-nav-view>
     <div id="form-search">
       <div style="float: left; width: 90%;">
-        <label class="item item-input">
-          <input type="text" placeholder="First Name">
-        </label>
+
+ <div class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="search" ng-model="searchval" placeholder="Buscar Blooky" ng-enter="searchBackend();">
+            <i ng-if="searchval.length" ng-click="clearSearch()" class="icon ion-ios-close placeholder-icon"></i>  
+          </div>
+             <button class="button button-clear" style="font-family: 'Bariol-Regular';" ng-enter="searchBackend();" ng-click="searchBackend()">
+                Buscar
+             </button>
+        </div>
       </div>
       <a class="button button-clear button-dark activated">Cancelar</a>
-    </div>
+    
   </body>
   <script>
     $("#button-search").click(function(){
