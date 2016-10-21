@@ -99,6 +99,10 @@ angular.module('starter.controllers', [])
     $scope.respostas = data;
   });
 
+})
+
+.controller('QuizCtrl', function($scope) {
+
 });
 
 

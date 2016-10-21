@@ -54,11 +54,60 @@
 
 #form-search{
   position: absolute; 
-  top: 50px; 
+  top: 0; 
   z-index: 9999; 
   display: none;
   width: 100%;
-  background-color: red;
   padding-right: 5%;
   padding-left: 5%;
+}
+
+#input-busca{
+  width: 100%;
+  background-color: #33cd5f !important;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 16px;
+}
+
+#label-busca{
+  background-color: #33cd5f !important;
+  width: 80%;
+  float: left;
+}
+
+::-webkit-input-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+:-moz-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+::-moz-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+:-ms-input-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+#cancelar-button, #buscar-button{
+  float: left;
+  color: black;
+  width: 10%;
+}
+
+#icon-lupa, #icon-apagar{
+  font-size: 24px !important;
+  color: white !important;
+  opacity: 0.5;
+}
+
+#icon-apagar{
+  cursor: pointer;
 }

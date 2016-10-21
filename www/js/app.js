@@ -97,6 +97,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'TabelaComparacaoCtrl'
         }
       }
+    })
+    .state('tab.quiz', {
+      url: '/quiz',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/quiz.html',
+          controller: 'QuizCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
