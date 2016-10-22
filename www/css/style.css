@@ -119,4 +119,34 @@
   float: left;
 }
 
+.slider-pager .slider-pager-page{
+  width: initial !important;
+}
+
+.slider{
+  min-height: 85vh;
+}
+
+.box-question{
+  width: 50%;
+  height: 50%;
+  background-color: #f8f8f8;
+  border-radius: 18px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.slider-slide{
+  min-height: 85vh;
+}
+
+.title-question{
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background-color: #d8d8d8;
+}
 
