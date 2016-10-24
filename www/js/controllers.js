@@ -102,7 +102,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('QuizCtrl', function($scope) {
-
+  console.log("aqui");
 });
 
 

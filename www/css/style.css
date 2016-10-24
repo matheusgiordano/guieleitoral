@@ -128,10 +128,10 @@
 }
 
 .box-question{
-  width: 50%;
+  width: 80%;
   height: 50%;
   background-color: #f8f8f8;
-  border-radius: 18px;
+  border-radius: 12px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -145,8 +145,8 @@
 }
 
 .title-question{
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   background-color: #d8d8d8;
 }
 
