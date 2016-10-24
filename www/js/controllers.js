@@ -101,8 +101,15 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('QuizCtrl', function($scope) {
-  console.log("aqui");
+.controller('QuizCtrl', function($scope, $stateParams, $http) {
+  
+  $scope.perguntas = [];
+  var ajaxRequest_respostas = $http.get("http://guiaeleitoral.esy.es/perguntas_cargo.php?cargo=" + $stateParams.cargo);
+
+  ajaxRequest_respostas.success(function(data, status, headers, config){
+    $scope.perguntas = data;
+    console.log($scope.perguntas);
+  });
 });
 
 

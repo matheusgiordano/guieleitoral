@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.quiz', {
-      url: '/quiz',
+      url: '/quiz/:cargo',
       views: {
         'tab-home': {
           templateUrl: 'templates/quiz.html',

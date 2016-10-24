@@ -1,53 +1,86 @@
 <ion-view view-title="Guia Eleitoral">
   <ion-content>
-<ion-slide-box on-slide-changed="slideHasChanged($index)">
-  <ion-slide>
-    <div class="box-question">
-      <div class="title-question">
-        <h1>Questão</h1>
-      </div>
-    </div>
-  </ion-slide>
-  <ion-slide>
-    <div class="box-question">
-      <div class="title-question">
-        <h1>Questão</h1>
-      </div>
-    </div>
-  </ion-slide>
-
-</ion-slide-box>
-
-<!--
-      <div class="perguntas">
-        <b>Pergunta 1</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 2</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 3</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 4</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 5</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 6</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 7</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 8</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 9</b>
-      </div>
-      <div class="perguntas">
-        <b>Pergunta 10</b>
-      </div>!-->
-   </ion-content>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 1</h2>
+          </div>
+          <h2>{{perguntas[0]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 2</h2>
+          </div>
+          <h2>{{perguntas[1]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 3</h2>
+          </div>
+          <h2>{{perguntas[2]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 4</h2>
+          </div>
+          <h2>{{perguntas[3]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 5</h2>
+          </div>
+          <h2>{{perguntas[4]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 6</h2>
+          </div>
+          <h2>{{perguntas[5]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 7</h2>
+          </div>
+          <h2>{{perguntas[6]}}</h2>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box-question">
+          <div class="title-question">
+            <h2>Pergunta 8</h2>
+          </div>
+          <h2>{{perguntas[7]}}</h2>
+        </div>
+     </ion-slide>
+     <ion-slide>
+       <div class="box-question">
+         <div class="title-question">
+           <h2>Pergunta 9</h2>
+         </div>
+         <h2>{{perguntas[8]}}</h2>
+       </div>
+     </ion-slide>
+     <ion-slide>
+       <div class="box-question">
+         <div class="title-question">
+           <h2>Pergunta 10</h2>
+         </div>
+         <h2>{{perguntas[9]}}</h2>
+       </div>
+     </ion-slide>
+   </ion-slide-box>
+ </ion-content>
 </ion-view>
