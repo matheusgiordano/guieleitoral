@@ -2,6 +2,9 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, Estados) {
   $scope.estados = Estados.all();
+
+  console.log($scope.estados);
+
   $scope.remove = function(estado) {
     Estados.remove(estado);
   };
@@ -110,6 +113,16 @@ angular.module('starter.controllers', [])
     $scope.perguntas = data;
     console.log($scope.perguntas);
   });
+})
+.controller('FixaCtrl', function($scope, $stateParams, $http) {
+  $scope.candidatos = [];
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos_all.php");
+
+  ajaxRequest.success(function(data, status, headers, config){
+    $scope.candidatos = data;
+    console.log($scope.candidatos);
+  });
 });
+;
 
 

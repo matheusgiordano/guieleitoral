@@ -148,3 +148,10 @@
   background-color: #d8d8d8;
 }
 
+#lista-inicial{
+  z-index: 999;
+  margin-top: 45px;
+  position: absolute;
+  width: 100%;
+  display: none;
+}

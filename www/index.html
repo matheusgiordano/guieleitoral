@@ -22,6 +22,7 @@
     </ion-nav-bar>
     <ion-nav-view>
     </ion-nav-view>
+    <form ng-controller="FixaCtrl">
     <div id="form-search">
       <div style="float: left; width: 100%;">
         <div class="item-input-wrapper" id="label-busca">
@@ -35,10 +36,21 @@
         <a class="button button-clear button-dark activated" id="cancelar-button">Cancelar</a>
       </div>
     </div>
+    <div id="lista-inicial">
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in candidatos" type="item-text-wrap" href="#">
+        <img src="" />
+        <h1>{{candidato}}</h1>
+        <h2></h2>
+      </ion-item>
+    </ion-list>
+    </div>
+    </form>
   </body>
   <script>
     $("#button-search").click(function(){
       $("#form-search").slideDown();
+      $("#lista-inicial").show();
     });
 
     $("#icon-apagar").click(function(){
