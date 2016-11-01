@@ -30,27 +30,26 @@
           <input type="search" ng-model="searchval" placeholder="Procurar candidato" ng-enter="searchBackend();" id="input-busca">
           <i class="icon ion-ios-close placeholder-icon" id="icon-apagar"></i>  
         </div>
-        <button class="button button-clear" ng-enter="searchBackend();" ng-click="searchBackend()" id="buscar-button">
-          Buscar
-        </button>
         <a class="button button-clear button-dark activated" id="cancelar-button">Cancelar</a>
       </div>
     </div>
+    <ion-content id="busca-content">
     <div id="lista-inicial">
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in candidatos" type="item-text-wrap" href="#">
-        <img src="" />
-        <h1>{{candidato}}</h1>
-        <h2></h2>
+        <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{candidato[2]}}" />
+        <h2>{{candidato[1]}}</h2>
+        <h3>Partido</h3>
       </ion-item>
     </ion-list>
     </div>
+    </ion-content>
     </form>
   </body>
   <script>
     $("#button-search").click(function(){
       $("#form-search").slideDown();
-      $("#lista-inicial").show();
+      $("#busca-content").show();
     });
 
     $("#icon-apagar").click(function(){
