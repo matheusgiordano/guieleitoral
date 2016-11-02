@@ -36,10 +36,10 @@
     <ion-content id="busca-content">
     <div id="lista-inicial">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in candidatos" type="item-text-wrap" href="#">
-        <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{candidato[2]}}" />
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in data.result" type="item-text-wrap" href="#">
+        <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{candidato[3]}}" />
         <h2>{{candidato[1]}}</h2>
-        <h3>Partido</h3>
+        <h3>{{candidato[2]}}</h3>
       </ion-item>
     </ion-list>
     </div>
