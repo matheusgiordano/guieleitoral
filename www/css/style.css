@@ -17,6 +17,9 @@
  bottom: 10%;
  right: 5%;
  z-index: 99;
+ display: none; 
+ font-size:24px; 
+ border-radius: 50%;
 }
 
 #lista-comparacao .item-checkbox .checkbox{
