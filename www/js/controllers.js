@@ -129,7 +129,7 @@ angular.module('starter.controllers', [])
     });
 
     // Evento para digitação no campo de busca
-    $("#input-busca").keypress(function(){
+    $("#input-busca").keyup(function(){
       // Setando o valor do que foi digitado
       filtro = $("#input-busca").val();
 
