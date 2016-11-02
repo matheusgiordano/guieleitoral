@@ -60,6 +60,10 @@
   width: 100%;
 }
 
+#form-content{
+  border-bottom: 1px solid #28a54c;
+}
+
 #input-busca{
   width: 100%;
   background-color: #33cd5f !important;
@@ -96,7 +100,7 @@
 
 #cancelar-button, #buscar-button{
   float: left;
-  color: black;
+  background-color: #33cd5f;
   width: 10%;
 }
 
@@ -159,4 +163,15 @@
   position: absolute;
   background-color: white;
   display: none;
+}
+
+#bt-voltar-busca{
+  color: white; 
+  float: left;
+  font-size: 17px;
+  height: auto !important;
+}
+
+#bt-voltar-busca::before{
+  font-size: 32px !important;
 }
