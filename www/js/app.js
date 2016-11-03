@@ -106,6 +106,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'QuizCtrl'
         }
       }
+    })
+    .state('tab.perfil', {
+      url: '/perfil/:candidato',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/perfil.html',
+          controller: 'PerfilCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback

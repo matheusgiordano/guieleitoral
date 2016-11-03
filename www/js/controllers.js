@@ -58,6 +58,7 @@ angular.module('starter.controllers', [])
      
     ajaxRequest.success(function(data, status, headers, config){
       $scope.candidatos = data;
+      console.log($scope.candidatos);
     });
 
    $scope.candidatos_comparacao = [];
@@ -160,5 +161,14 @@ angular.module('starter.controllers', [])
         }
       );
     });
+  });
+})
+.controller('PerfilCtrl', function($scope, $stateParams, $http) {
+  $scope.perfil = [];
+
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/perfil.php?id="+$stateParams.candidato);
+
+  ajaxRequest.success(function(data, status, headers, config){
+    $scope.perfil = data;
   });
 });
