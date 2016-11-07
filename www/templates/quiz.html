@@ -1,56 +1,79 @@
 <ion-view view-title="Guia Eleitoral">
   <ion-content>
-    <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[0]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[1]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[2]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[3]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[4]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[5]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[6]}}</b>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box-question">
-          <b>{{perguntas[7]}}</b>
-        </div>
-     </ion-slide>
-     <ion-slide>
-       <div class="box-question">
-         <b>{{perguntas[8]}}</b>
-       </div>
-     </ion-slide>
-     <ion-slide>
-       <div class="box-question">
-         <b>{{perguntas[9]}}</b>
-       </div>
-     </ion-slide>
-   </ion-slide-box>
+  <form name="lista-comparacao">
+      <ion-slide-box on-slide-changed="slideHasChanged($index)">
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[0]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-0">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-0">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[1]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-1">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-1">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[2]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-2">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-2">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[3]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-3">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-3">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[4]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-4">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-4">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[5]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-5">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-5">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[6]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-6">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-6">Não</ion-radio>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box-question">
+            <b>{{perguntas[7]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-7">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-7">Não</ion-radio>
+          </div>
+       </ion-slide>
+       <ion-slide>
+         <div class="box-question">
+           <b>{{perguntas[8]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-8">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-8">Não</ion-radio>
+         </div>
+       </ion-slide>
+       <ion-slide>
+         <div class="box-question">
+           <b>{{perguntas[9]}}</b>
+            <ion-radio name="pergunta{{$index}}" ng-value="1" id="pergunta-9">Sim</ion-radio>
+            <ion-radio name="pergunta{{$index}}" ng-value="0" id="pergunta-9">Não</ion-radio>
+         </div>
+       </ion-slide>
+     </ion-slide-box>
+     <button class="button ion-checkmark button-balanced" ng-click="quiz_perguntas()">TESTE</button>
+   </form>
  </ion-content>
 </ion-view>
