@@ -56,7 +56,6 @@ angular.module('starter.controllers', [])
      
     ajaxRequest.success(function(data, status, headers, config){
       $scope.candidatos = data;
-      console.log($scope.candidatos);
     });
 
    $scope.candidatos_comparacao = [];
@@ -119,7 +118,6 @@ angular.module('starter.controllers', [])
   ajaxRequest.success(function(data, status, headers, config){
     $scope.respostas_candidatos = data;
 
-
     // Função que é chamada ao finalizar o QUIZ
     $scope.quiz_perguntas = function(){
       $scope.compativeis = [];
@@ -136,7 +134,7 @@ angular.module('starter.controllers', [])
         // Iterator que verificará se o valor da pergunta na tela é compativel com o valor da resposta do candidato, e incrementa 1 ao 
         // contador
         for(i = 0; i < 10; i++){
-          if(value[i] == $("#pergunta-"+i).val()){
+          if(value[i] == $("#pergunta-"+i+" input:checked").val()){
             contador_compativeis = contador_compativeis + 1;
           }
         }
@@ -160,20 +158,20 @@ angular.module('starter.controllers', [])
       candidato4 = $scope.compativeis[3];
       candidato5 = $scope.compativeis[4];
 
-      $state.go('tab.resultado-quiz', {'candidato1': candidato1});
+      $state.go('tab.resultado-quiz', {'candidato1': candidato1,'candidato2': candidato2,'candidato3': candidato3,'candidato4': candidato4,'candidato5': candidato5 , 'compativeis': $scope.compativeis});
     };
   });
 })
 
 .controller('ResultadoQuizCtrl', function($scope, $stateParams, $http) {
    $scope.candidato1 = $stateParams.candidato1;
+   console.log($scope.candidato1);
    $scope.candidato2 = $stateParams.candidato2;
+   console.log($scope.candidato2);
    $scope.candidato3 = $stateParams.candidato3;
    $scope.candidato4 = $stateParams.candidato4;
    $scope.candidato5 = $stateParams.candidato5;
-
-   console.log($stateParams.candidato1);
-   console.log($scope.candidato1);
+   $scope.compativeis = $stateParams.compativeis;
 })  
 
 .controller('FixaCtrl', function($scope, $stateParams, $http, $q, $timeout) {

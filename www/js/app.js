@@ -119,11 +119,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     .state('tab.resultado-quiz', {
       url: '/resultado-quiz/',
       params: {
-        'candidato1': [],
-        'candidato2': [],
-        'candidato3': [],
-        'candidato4': [],
-        'candidato5': []
+        'candidato1': null,
+        'candidato2': null,
+        'candidato3': null,
+        'candidato4': null,
+        'candidato5': null,
+        'score1'    : null,
+        'score2'    : null,
+        'score3'    : null,
+        'score4'    : null,
+        'score5'    : null
       },
       views: {
         'tab-home': {
