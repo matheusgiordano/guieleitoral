@@ -1,10 +1,11 @@
 <ion-view view-title="Guia Eleitoral">
   <form name="lista-comparacao">
   <ion-content>
-    {{candidato1}}
+     
      <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="compativel in compativeis" type="item-text-wrap" href="#">
-        <h2>{{compativel[0]}}</h2>  
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#" ng-repeat="compativel in compativeis_consulta">
+         <h2>{{compativel.nome}}</h2>
+         <h2>{{compativel.score}}0%</h2>
       </ion-item>
     </ion-list>
    </ion-content>

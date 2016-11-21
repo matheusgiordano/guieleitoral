@@ -152,26 +152,39 @@ angular.module('starter.controllers', [])
       $scope.compativeis.splice(5);
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
-      candidato1 = $scope.compativeis[0];
-      candidato2 = $scope.compativeis[1];
-      candidato3 = $scope.compativeis[2];
-      candidato4 = $scope.compativeis[3];
-      candidato5 = $scope.compativeis[4];
 
-      $state.go('tab.resultado-quiz', {'candidato1': candidato1,'candidato2': candidato2,'candidato3': candidato3,'candidato4': candidato4,'candidato5': candidato5 , 'compativeis': $scope.compativeis});
+      $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
     };
   });
 })
 
 .controller('ResultadoQuizCtrl', function($scope, $stateParams, $http) {
-   $scope.candidato1 = $stateParams.candidato1;
-   console.log($scope.candidato1);
-   $scope.candidato2 = $stateParams.candidato2;
-   console.log($scope.candidato2);
-   $scope.candidato3 = $stateParams.candidato3;
-   $scope.candidato4 = $stateParams.candidato4;
-   $scope.candidato5 = $stateParams.candidato5;
-   $scope.compativeis = $stateParams.compativeis;
+  $scope.compativeis = $stateParams.compativeis;
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  
+  $scope.compativeis_consulta = [];
+  $.each($scope.compativeis, function( key, value ) {
+    for(var i in this){
+      var score = {"score": i};
+    }
+    value = cleanArray(value);
+
+    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/perfil.php?id="+value);
+
+    ajaxRequest.success(function(data, status, headers, config){
+      data_collect = $.extend(data, score);
+      $scope.compativeis_consulta = $scope.compativeis_consulta.concat(data);
+    });
+  }); 
 })  
 
 .controller('FixaCtrl', function($scope, $stateParams, $http, $q, $timeout) {
