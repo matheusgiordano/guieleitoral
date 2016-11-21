@@ -1,5 +1,13 @@
 <ion-view view-title="Perfil">
   <ion-content>
-   {{perfil}}
+  	<div id="faixa-superior-perfil">
+  	  <div id="foto-perfil">
+  	    <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{perfil.foto}}">
+  	  </div>
+  	  <div id="dados-principais-perfil">
+  	    <h3>{{perfil.nome}}</h3>
+  	    <h4>{{perfil.numero}} - {{perfil.partido}}</h4>
+  	  </div>
+  	</div>
   </ion-content>
 </ion-view>

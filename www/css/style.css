@@ -181,3 +181,45 @@
 }
 
 /* QUIZ */
+
+#score-quiz{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  line-height: 70px;
+}  
+
+/* PERFIL */
+
+#faixa-superior-perfil{
+  height: 150px;
+  background-color: rgba(216,216,216,0.4);
+  border-bottom: 1px solid #cccccc;
+}
+
+#foto-perfil{
+  line-height: 150px;
+  width: 180px;
+  text-align: left;
+  display: table;
+  float: left;
+}
+
+#dados-principais-perfil{
+  text-align: left;
+  display: table;
+  color: #484848;
+  padding-top: 30px;
+}
+
+#dados-principais-perfil h3{
+  color: #484848;
+}
+
+#foto-perfil img{
+  height: 130px; 
+  width: 130px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 30px;
+}

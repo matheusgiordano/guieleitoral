@@ -3,9 +3,11 @@
   <ion-content>
      
      <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#" ng-repeat="compativel in compativeis_consulta">
-         <h2>{{compativel.nome}}</h2>
-         <h2>{{compativel.score}}0%</h2>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/tab/perfil/{{compativel.id}}" ng-repeat="compativel in compativeis_consulta" ng-if="compativel.score > 0">
+        <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{compativel.foto}}">
+        <h2>{{compativel.nome}}</h2>
+        <h3>{{compativel.partido}}</h3>
+        <h2 id="score-quiz">{{compativel.score}}0%</h2>
       </ion-item>
     </ion-list>
    </ion-content>
