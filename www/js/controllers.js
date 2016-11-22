@@ -113,7 +113,7 @@ angular.module('starter.controllers', [])
 
   $scope.respostas_candidatos = [];
 
-  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php");
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php?cargo=" + $stateParams.cargo + "&estado=" + $stateParams.estado);
 
   ajaxRequest.success(function(data, status, headers, config){
     $scope.respostas_candidatos = data;
@@ -146,8 +146,11 @@ angular.module('starter.controllers', [])
       });
       // Ordena os arrays dentro dos compativeis para que pegue sempre os mais compativeis primeiro
       $scope.compativeis.sort(function(a, b){
-        return a > b;
+        return Object.keys(a)[0] - Object.keys(b)[0];
+        //return a > b;
       });
+      // Reverte para pegar os primeiros com mais score
+      $scope.compativeis.reverse();
       // Deixa apenas os 5 primeiros elementos dentro do array e descarta os demais
       $scope.compativeis.splice(5);
       // Redireciona para a tela dos compativeis
