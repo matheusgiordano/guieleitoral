@@ -103,19 +103,21 @@ angular.module('starter.controllers', [])
 })
 
 .controller('QuizCtrl', function($scope, $stateParams, $http, $state) {
-  
+  // Array com perguntas
   $scope.perguntas = [];
+  // Requisição com perguntas referentes a este cargo
   var ajaxRequest_respostas = $http.get("http://guiaeleitoral.esy.es/perguntas_cargo.php?cargo=" + $stateParams.cargo);
-
+  // Populando array de perguntas com resultado
   ajaxRequest_respostas.success(function(data, status, headers, config){
     $scope.perguntas = data;
   });
-
+  // Array com respostas
   $scope.respostas_candidatos = [];
-
+  // Requisição com respostas dos candidatos deste cargo e deste estado
   var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php?cargo=" + $stateParams.cargo + "&estado=" + $stateParams.estado);
 
   ajaxRequest.success(function(data, status, headers, config){
+    // Populando array de respostas com resultado
     $scope.respostas_candidatos = data;
 
     // Função que é chamada ao finalizar o QUIZ
@@ -149,7 +151,7 @@ angular.module('starter.controllers', [])
         return Object.keys(a)[0] - Object.keys(b)[0];
         //return a > b;
       });
-      // Reverte para pegar os primeiros com mais score
+      // Inverte para pegar os primeiros com mais score
       $scope.compativeis.reverse();
       // Deixa apenas os 5 primeiros elementos dentro do array e descarta os demais
       $scope.compativeis.splice(5);
@@ -162,8 +164,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ResultadoQuizCtrl', function($scope, $stateParams, $http) {
+  // Recebe parametros dos compativeis
   $scope.compativeis = $stateParams.compativeis;
 
+  //Função encarregada de limpar os valores null
   function cleanArray(actual) {
     var newArray = new Array();
     for (var i = 0; i < actual.length; i++) {
@@ -173,20 +177,35 @@ angular.module('starter.controllers', [])
     }
     return newArray;
   }
-  
+  // Variável encarregado de retornar para a tela o array de candidatos
   $scope.compativeis_consulta = [];
+  // Timer para delay de cada requisição ajax
+  var timer = 800;
+
+  // Laço para capturar os dados de cada id de candidato que foi retornado como compativel
   $.each($scope.compativeis, function( key, value ) {
+    // Laço encarregado de pegar o score deste candidato que está sendo listado
     for(var i in this){
       var score = {"score": i};
     }
+    // limpando o array com os caracteres ou valores null
     value = cleanArray(value);
 
-    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/perfil.php?id="+value);
-
-    ajaxRequest.success(function(data, status, headers, config){
-      data_collect = $.extend(data, score);
-      $scope.compativeis_consulta = $scope.compativeis_consulta.concat(data);
-    });
+    // Delay para o timer entre as requisições ajax
+    function delay(){
+      // Requisição para buscar o candidato
+      var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/perfil.php?id="+value);
+     
+      ajaxRequest.success(function(data, status, headers, config){
+        // Preenchendo os valores do candidato e dando merge ao score
+        data_collect = $.extend(data, score);
+        // Aplicando ao final do array o candidato que está sendo consultado nesta instância do laço
+        $scope.compativeis_consulta = $scope.compativeis_consulta.concat(data);
+      });
+    }
+    // Delay para a função
+    setTimeout(delay, timer);
+    timer += 800;
   }); 
 })  
 
