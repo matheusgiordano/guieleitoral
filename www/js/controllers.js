@@ -180,7 +180,7 @@ angular.module('starter.controllers', [])
   // Variável encarregado de retornar para a tela o array de candidatos
   $scope.compativeis_consulta = [];
   // Timer para delay de cada requisição ajax
-  var timer = 800;
+  var timer = 1100;
 
   // Laço para capturar os dados de cada id de candidato que foi retornado como compativel
   $.each($scope.compativeis, function( key, value ) {
@@ -205,7 +205,7 @@ angular.module('starter.controllers', [])
     }
     // Delay para a função
     setTimeout(delay, timer);
-    timer += 800;
+    timer += 1100;
   }); 
 })  
 
