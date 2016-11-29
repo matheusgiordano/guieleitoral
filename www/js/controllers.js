@@ -8,6 +8,10 @@ angular.module('starter.controllers', [])
   };
 })
 
+.controller('HistoricoCtrl', function($scope) {
+})
+
+/*
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -26,7 +30,7 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
-
+*/
 .controller('CargosCtrl', function($scope, $http, $stateParams, Estados) {
      $scope.estado_clicado = Estados.get($stateParams.estado);
      $scope.cargos = [];
