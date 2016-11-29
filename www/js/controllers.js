@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope, Estados) {
+.controller('HomeCtrl', function($scope, Estados, ListaHistorico) {
   $scope.estados = Estados.all();
 
   $scope.remove = function(estado) {

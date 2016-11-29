@@ -1,4 +1,16 @@
 angular.module('starter.services', [])
+
+.factory('ListaHistorico', function(){
+  var db_local = openDatabase('historico', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
+
+   return {
+    get: function() {
+      return null;
+    }
+  };
+
+})
+
 .factory('Estados', function() {
   var estados = [{
     id: 0,
