@@ -1,0 +1,43 @@
+<ion-view view-title="Perfil">
+  <ion-content id="perfil">
+  	<div id="faixa-superior-perfil">
+  	  <div id="foto-perfil">
+  	    <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{perfil.foto}}">
+  	  </div>
+  	  <div id="dados-principais-perfil">
+  	    <h3>{{perfil.nome}}</h3>
+  	    <h4>{{perfil.cargo}}<span ng-if="perfil.estado != 'Federal'"> - {{perfil.estado}}</span></h4>
+  	    <h5>{{perfil.numero}} - {{perfil.partido}}</h5>
+  	  </div>
+  	</div>
+	<div class="list">
+	  <div class="item item-divider">
+        Dados Pessoais
+      </div>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Apelido</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.apelido}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Data de Nascimento</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.dt_nascimento | date:'dd/MM/yyyy '}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Nacionalidade</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.nacionalidade}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Grau de Instrução</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.grau_instrucao}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Ocupação</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.ocupacao}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Estado Civil</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.est_civil}}">
+	  </label>
+	</div>
+  </ion-content>
+</ion-view>

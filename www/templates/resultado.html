@@ -1,0 +1,15 @@
+<ion-view view-title="Guia Eleitoral">
+  <form name="lista-comparacao">
+  <ion-content>
+     
+     <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"  ng-repeat="compativel in compativeis_consulta" ng-if="compativel.score > 0" href="#/tab/perfil/{{compativel.id}}">
+        <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{compativel.foto}}">
+        <h2>{{compativel.nome}}</h2>
+        <h3>{{compativel.partido}}</h3>
+        <h2 id="score-quiz">{{compativel.score}}0%</h2>
+      </ion-item>
+    </ion-list>
+   </ion-content>
+   </form>
+</ion-view>

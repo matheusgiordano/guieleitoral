@@ -1,0 +1,251 @@
+.tab-titulo-unico ion-item a{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.tab-titulo-unico ion-item h2{
+  line-height: 72px;
+}
+
+.tabs{
+  bottom: 0px !important;
+  position: absolute !important;
+}
+
+#comparar{
+ position: fixed;
+ bottom: 10%;
+ right: 5%;
+ z-index: 99;
+ display: none; 
+ font-size:24px; 
+ border-radius: 50%;
+}
+
+#lista-comparacao .item-checkbox .checkbox{
+  left: auto !important;
+}
+
+#tabela-comparativa td{
+  border: 1px solid white;
+  background-color: #eeeeee;
+  width: 33%;
+  text-align: center;
+}
+
+#tabela-comparativa{
+   width: 100%;
+}
+
+.avatar-tabela{
+  width: 40px;
+  height: 40px;
+}
+
+#tabela-comparativa .coluna-fixa{
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(85,85,85,1);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(85,85,85,1);
+  box-shadow: 3px 3px 5px 0px rgba(85,85,85,1);
+  position: relative;
+}
+
+#button-search{
+  z-index:100 !important;
+  right: 5px;
+  position: absolute;
+}
+
+#form-search{
+  position: absolute; 
+  top: 0; 
+  z-index: 9999; 
+  display: none;
+  width: 100%;
+}
+
+#form-content{
+  border-bottom: 1px solid #28a54c;
+}
+
+#input-busca{
+  width: 100%;
+  background-color: #33cd5f !important;
+  border-bottom: 1px solid white;
+  color: white !important;
+  font-size: 16px;
+  text-decoration: none !important;
+}
+
+#label-busca{
+  background-color: #33cd5f !important;
+  width: 80%;
+  float: left;
+}
+
+::-webkit-input-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+:-moz-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+::-moz-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+:-ms-input-placeholder{
+  color: white !important;
+  opacity: 0.5;
+}
+
+#cancelar-button, #buscar-button{
+  float: left;
+  background-color: #33cd5f;
+  width: 10%;
+}
+
+#icon-lupa, #icon-apagar{
+  font-size: 24px !important;
+  color: white !important;
+  opacity: 0.5;
+}
+
+#icon-apagar{
+  cursor: pointer;
+}
+
+.perguntas{
+  height: 100px;
+  width: 100%;
+  display: table;
+  float: left;
+}
+
+.slider-pager .slider-pager-page{
+  width: initial !important;
+}
+
+.slider{
+  min-height: 85vh;
+}
+
+.box-question{
+  width: 80%;
+  height: 58%;
+  /*background-color: rgba(187, 187, 187, 0.4);*/
+  background-color: rgba(80, 80, 80, 0.4);
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.box-question .perguntas{
+  position: absolute;
+  width: calc(100% - 2px);
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+}
+
+.box-question b:first-of-type{
+  color: white;
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  top: 20px;
+  font-size: 16px;
+}
+
+.box-question .perguntas label:last-of-type {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.slider-slide{
+  min-height: 85vh;
+}
+
+.title-question{
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: #d8d8d8;
+}
+
+#lista-inicial{
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+}
+
+#busca-content{
+  z-index: 999;
+  position: absolute;
+  background-color: white;
+  display: none;
+}
+
+#bt-voltar-busca{
+  color: white; 
+  float: left;
+  font-size: 17px;
+  height: auto !important;
+}
+
+#bt-voltar-busca::before{
+  font-size: 32px !important;
+}
+
+/* QUIZ */
+
+#score-quiz{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  line-height: 70px;
+}  
+
+/* PERFIL */
+
+#faixa-superior-perfil{
+  min-height: 150px;
+  background-color: rgba(187, 187, 187, 0.4);
+  border-bottom: 1px solid #cccccc;
+}
+
+#foto-perfil{
+  line-height: 150px;
+  width: 180px;
+  text-align: left;
+  display: table;
+  float: left;
+}
+
+#dados-principais-perfil{
+  text-align: left;
+  display: table;
+  color: #484848;
+  padding-top: 30px;
+}
+
+#dados-principais-perfil h3{
+  color: #484848;
+}
+
+#foto-perfil img{
+  height: 130px; 
+  width: 130px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-left: 30px;
+}
+
+#perfil .item input{
+   text-transform: capitalize;
+}

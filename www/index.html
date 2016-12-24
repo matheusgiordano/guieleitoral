@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="manifest" href="manifest.json">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/jquery.js"></script>
+  </head>
+  <body ng-app="starter">
+    <ion-nav-bar class="bar bar-header bar-balanced">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+      <a class="button button-icon icon ion-ios-search-strong" id="button-search"></a>
+    </ion-nav-bar>
+    <ion-nav-view>
+    </ion-nav-view>
+    <form ng-controller="FixaCtrl">
+    <div id="form-search">
+      <div id="form-content" style="float: left; width: 100%;">
+        <button class="button back-button buttons button-clear header-item" id="cancelar-button" style="height: 43px; min-height: 43px; max-height: 43px;">
+          <i class="icon ion-ios-arrow-back" id="bt-voltar-busca"></i>
+        </button>
+        <div class="item-input-wrapper" id="label-busca">
+          <i class="icon ion-ios-search placeholder-icon" id="icon-lupa"></i>
+          <input type="search" ng-model="searchval" placeholder="Procurar candidato" ng-enter="searchBackend();" id="input-busca">
+          <i class="icon ion-ios-close placeholder-icon" id="icon-apagar"></i>
+        </div>
+      </div>
+    </div>
+    <ion-content id="busca-content">
+    <div id="lista-inicial">
+    <ion-list>
+      <div id="item-busca">
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="candidato in data.result" type="item-text-wrap" href="#/tab/perfil/{{candidato[0]}}">
+          <img src="http://guiaeleitoral.esy.es/imagens/candidatos/{{candidato[3]}}">
+          <h2>{{candidato[1]}}</h2>
+          <h3>{{candidato[2]}}</h3>
+        </ion-item>
+      </div>
+    </ion-list>
+    </div>
+    </ion-content>
+    </form>
+  </body>
+  <script>
+    $("#button-search").click(function(){
+      $("#form-search").slideDown();
+      $("#busca-content").show();
+      $("#button-search").hide();
+    });
+
+    $("#icon-apagar").click(function(){
+      $("#input-busca").val("");
+    });
+
+    $("#cancelar-button").click(function(){
+      $("#form-search").slideUp();
+      $("#busca-content").hide();
+      $("#button-search").show();
+    });
+
+    $("#item-busca").click(function(){
+      $("#form-search").slideUp();
+      $("#busca-content").hide();
+      $("#button-search").show();
+    });
+  </script>
+</html>
