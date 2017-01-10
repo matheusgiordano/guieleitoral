@@ -107,6 +107,17 @@ angular.module('starter.controllers', [])
 })
 
 .controller('QuizCtrl', function($scope, $stateParams, $http, $state) {
+  angular.element(document).ready(function(){
+    jQuery(".item-radio").click(function(){
+      if($(this).hasClass('active-radio') == true){
+        $(this).removeClass('active-radio');
+        $(this).find("input").prop('checked',false);
+      }else{
+        $(this).addClass('active-radio');
+        $(this).find("input").attr('checked', 'checked');
+      }
+    });
+  });
   // Array com perguntas
   $scope.perguntas = [];
   // Requisição com perguntas referentes a este cargo
