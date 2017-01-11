@@ -266,6 +266,26 @@
   color: white;
   line-height: 25px;
 }
+
+#state-quiz #paginator-left{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 10px;
+  height: 30px;
+  z-index: 999;
+}
+
+#state-quiz #paginator-right{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 10px;
+  height: 30px;
+  z-index: 999;
+}
 /* teste */
 
 

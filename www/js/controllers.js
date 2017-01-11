@@ -123,6 +123,21 @@ angular.module('starter.controllers', [])
       }
     });
   });
+
+  // Função para captar o indice do slide quando trocar
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
+
+  // Função para pular para o proximo slide
+  $scope.slideNext = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+
+  // Função para retornar ao último slide
+  $scope.slidePrevious = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
   // Array com perguntas
   $scope.perguntas = [];
   // Requisição com perguntas referentes a este cargo
