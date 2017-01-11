@@ -106,15 +106,20 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('QuizCtrl', function($scope, $stateParams, $http, $state) {
+.controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate) {
+  // Função que escuta quando as respostas são alteradas para paginar ou marcar as páginações
   angular.element(document).ready(function(){
     jQuery(".item-radio").click(function(){
+      input_indice = $(this).find("input").attr('name').match(/[0-9]{1,}/);
       if($(this).hasClass('active-radio') == true){
         $(this).removeClass('active-radio');
         $(this).find("input").prop('checked',false);
+        $("#circle-pagínator-"+input_indice).removeClass("circle-pager-active").addClass("circle-pager");
       }else{
         $(this).addClass('active-radio');
         $(this).find("input").attr('checked', 'checked');
+        $("#circle-pagínator-"+input_indice).removeClass("circle-pager").addClass("circle-pager-active");
+        $ionicSlideBoxDelegate.next();
       }
     });
   });

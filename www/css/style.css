@@ -249,7 +249,26 @@
    text-transform: capitalize;
 }
 
+#state-quiz .circle-pager{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #28a54c;
+  line-height: 25px;
+}
+
+#state-quiz .circle-pager-active{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #28a54c;
+  background: #28a54c;
+  color: white;
+  line-height: 25px;
+}
 /* teste */
+
+
 #svg-map path { fill:#0094d9 }
     #svg-map text { fill:#fff; font:12px Arial-BoldMT, sans-serif; cursor:pointer }
     #svg-map a{ text-decoration:none }

@@ -66430,7 +66430,7 @@ function($animate, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $i
     restrict: 'E',
     replace: true,
     require: '^ionSlideBox',
-    template: '<div class="slider-pager"><span class="slider-pager-page" ng-repeat="slide in numSlides() track by $index" ng-class="{active: $index == currentSlide}" ng-click="pagerClick($index)"><!--<i class="icon ion-record"></i>--><div class="paginator-button">{{$index + 1}}</div></span></div>',
+    template: '<div class="slider-pager"><span class="slider-pager-page" ng-repeat="slide in numSlides() track by $index" ng-class="{active: $index == currentSlide}" ng-click="pagerClick($index)"><div id="circle-pagínator-{{$index}}" class="circle-pager"><!--<i class="icon ion-record"></i>--><div class="paginator-button">{{$index + 1}}</div></div></span></div>',
     link: function($scope, $element, $attr, slideBox) {
       var selectPage = function(index) {
         var children = $element[0].children;
