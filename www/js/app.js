@@ -19,7 +19,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    alert(window.Connection);
+    alert(navigator.connection.type);
     if(window.Connection) {
 
   if(navigator.connection.type == Connection.NONE) {
