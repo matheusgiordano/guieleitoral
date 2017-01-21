@@ -332,4 +332,8 @@ angular.module('starter.controllers', [])
     $scope.perfil = data;
   });
 
+})
+
+.controller('ErroConexaoCtrl', function($scope) {
+
 });

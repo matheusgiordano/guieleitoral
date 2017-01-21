@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -24,6 +24,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       if(navigator.connection.type == Connection.NONE) {
         alert('There is no internet connection available');
         event.preventDefault();
+        $state.go('tab.erro-conexao');
       }
     });
   });
@@ -122,6 +123,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-home': {
           templateUrl: 'templates/resultado.html',
           controller: 'ResultadoQuizCtrl'
+        }
+      }
+    })
+    .state('tab.erro-conexao', {
+      url: '/erro-conexao/',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/erro-conexao.html',
+          controller: 'ErroConexaoCtrl'
         }
       }
     });
