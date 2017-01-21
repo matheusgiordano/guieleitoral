@@ -20,10 +20,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
     $rootScope.$on('$stateChangeStart', function (event) {
-      if(navigator.connection.type == Connection.NONE && location.hash != "#/tab/erro-conexao/") {
+      if(location.hash != "#/tab/erro-conexao/"){
+      if(navigator.connection.type == Connection.NONE) {
         alert('There is no internet connection available');
         event.preventDefault();
         $state.go('tab.erro-conexao');
+        return false;
+      }
       }
     });
   });
