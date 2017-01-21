@@ -20,9 +20,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
 
-    $rootScope.$on('$stateChangeStart', function () {
+    $rootScope.$on('$stateChangeStart', function (event) {
       if(navigator.connection.type == Connection.NONE) {
         alert('There is no internet connection available');
+        event.preventDefault();
       }
     });
   });
