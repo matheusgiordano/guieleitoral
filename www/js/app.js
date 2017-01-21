@@ -19,9 +19,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-
     $rootScope.$on('$stateChangeStart', function (event) {
-      if(navigator.connection.type == Connection.NONE) {
+      if(navigator.connection.type == Connection.NONE && location.hash != "#/tab/erro-conexao/") {
         alert('There is no internet connection available');
         event.preventDefault();
         $state.go('tab.erro-conexao');
