@@ -22,9 +22,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     i = 0;
     $rootScope.$on('$stateChangeStart', function (event) {    
       if(navigator.connection.type == Connection.NONE) {
-        alert('There is no internet connection available');
-        event.preventDefault();
         location.href = "#/tab/erro-conexao/"
+        event.preventDefault();
       }
     });
   });
