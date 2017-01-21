@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,17 +19,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    alert(navigator.connection.type);
-    if(window.Connection) {
 
-  if(navigator.connection.type == Connection.NONE) {
-      alert('There is no internet connection available');
-  }else{
-      alert(navigator.connection.type);
-  }
-}else{
-      alert('Cannot find Window.Connection');
-}
+    $rootScope.$on('$stateChangeStart', function () {
+      if(navigator.connection.type == Connection.NONE) {
+        alert('There is no internet connection available');
+      }
+    });
   });
 })
 
