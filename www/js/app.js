@@ -19,18 +19,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    i = 0;
     $rootScope.$on('$stateChangeStart', function (event) {
+      window.location.href = "#/tab/erro-conexao/"
+      /*
+      event.preventDefault();
+      $state.go('tab.erro-conexao');
+      return false;*/
+      //teste(event);  
       if(navigator.connection.type == Connection.NONE) {
-        teste(event);  
+        
       }
     });
-
-    function teste(e){
-      alert("sem rede");
-      $state.go('tab.erro-conexao');
-      e.preventDefault();
-    }
   });
 })
 
