@@ -20,14 +20,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
     $rootScope.$on('$stateChangeStart', function (event) {
-      window.location.href = "#/tab/erro-conexao/"
-      /*
-      event.preventDefault();
-      $state.go('tab.erro-conexao');
-      return false;*/
-      //teste(event);  
       if(navigator.connection.type == Connection.NONE) {
-        
+        window.location.href = "#/tab/erro-conexao/"
       }
     });
   });
