@@ -1,7 +1,7 @@
 <ion-view view-title="Guia Eleitoral">
   <ion-content id="state-quiz">
   <form name="lista-comparacao">
-    <img ng-if="slideIndex > 0" src="/img/icones/arrow_left.png" id="paginator-left" ng-click="slidePrevious()"/>
+    <img ng-if="slideIndex > 0" src="img/icones/arrow_left.png" id="paginator-left" ng-click="slidePrevious()"/>
       <ion-slide-box on-slide-changed="slideChanged($index)">
         <ion-slide>
           <div class="box-question">
@@ -105,7 +105,7 @@
        </ion-slide>
      </ion-slide-box>
      <button class="button ion-checkmark button-balanced" id="comparar" ng-click="quiz_perguntas()" style="display: block;"></button>
-     <img ng-if="slideIndex != 9" src="/img/icones/arrow_right.png" id="paginator-right" ng-click="slideNext()"/>
+     <img ng-if="slideIndex != 9" src="img/icones/arrow_right.png" id="paginator-right" ng-click="slideNext()"/>
    </form>
  </ion-content>
 </ion-view>
