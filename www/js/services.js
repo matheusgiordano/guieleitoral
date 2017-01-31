@@ -1,11 +1,88 @@
 angular.module('starter.services', [])
 
-.factory('ListaHistorico', function(){
-  var db_local = openDatabase('historico', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
+.factory('ListaHistorico', function($q){
+  var db;
 
-   return {
-    get: function() {
-      return null;
+  function createDB(){
+    try{
+      db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
+      db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER )');
+      });
+    }catch(erro){
+      alert("Erro: " + erro);
+    }
+    console.log("Banco criado com sucesso !");
+  }
+  
+  function createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico){
+    console.log(cargo);
+    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"')",
+      defaultResultHandler,
+      defaultErrorHandler);
+  }
+
+  function getHistoricos(){
+    return promisedQuery('SELECT * FROM historico ORDER BY estado DESC',
+      defaultResultHandler,
+      defaultErrorHandler);
+  }
+
+  function promisedQuery(query, successCallback, errorCallback) {
+    var deferred = $q.defer();
+    db.transaction(function(tx){
+      tx.executeSql(query, [], successCallback(deferred), errorCallback(deferred));
+    }, errorCallback);
+    return deferred.promise;
+  }
+        
+
+  function defaultResultHandler(deferred) {
+    return function(tx, results) {
+      var len = results.rows.length,
+      outputResults = [];
+
+      for (var i=0; i<len; i++){
+        var historico = {
+          'id'  : results.rows.item(i).id,
+          'cargo': results.rows.item(i).id_cargo,
+          'estado': results.rows.item(i).estado,
+          'score_resultado_1': results.rows.item(i).score_resultado_1,
+          'id_resultado_1': results.rows.item(i).id_resultado_1,
+          'score_resultado_2': results.rows.item(i).score_resultado_2,
+          'id_resultado_2': results.rows.item(i).id_resultado_2,
+          'score_resultado_3': results.rows.item(i).score_resultado_3,
+          'id_resultado_3': results.rows.item(i).id_resultado_3,
+          'score_resultado_4': results.rows.item(i).score_resultado_4,
+          'id_resultado_4': results.rows.item(i).id_resultado_4,
+          'score_resultado_5': results.rows.item(i).score_resultado_5,
+          'id_resultado_5': results.rows.item(i).id_resultado_5
+        };
+        outputResults.push(historico);
+      }
+      deferred.resolve(outputResults);
+    }
+  }
+
+
+  function defaultErrorHandler(deferred) {
+    console.log("AQUI");
+    return function(tx, results) {
+      var len = 0;
+      var outputResults = '';
+      deferred.resolve(outputResults);
+    }
+  }
+
+  return {
+    createDB: function(){
+      return createDB();
+    },
+    create: function(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico) {
+      return createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico);
+    },
+    all: function() {
+      return getHistoricos();
     }
   };
 

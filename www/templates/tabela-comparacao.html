@@ -2,17 +2,12 @@
   <ion-content class="padding">
     <table id="tabela-comparativa">
       <tr>
-        <td style="background-color: initial;">&nbsp;</td>
-        <td align="center" class="coluna-fixa">
-          <img ng-src="http://guiaeleitoral.esy.es/imagens/candidatos/{{concorrentes[1].foto}}" class="avatar-tabela">
-          <br/>
-          <b>{{concorrentes[1].nome}}</b>
-        </td>
-        <td align="center" class="coluna-fixa">
-          <img ng-src="http://guiaeleitoral.esy.es/imagens/candidatos/{{concorrentes[2].foto}}" class="avatar-tabela">
-          <br/>
-          <b>{{concorrentes[2].nome}}</b>
-        </td>
+          <td style="background-color: initial;">&nbsp;</td>
+          <td align="center" class="coluna-fixa" ng-repeat='concorrente in concorrentes'>
+           <img ng-src="http://guiaeleitoral.esy.es/imagens/candidatos/{{concorrente.foto}}" class="avatar-tabela">
+           <br/>
+           <b>{{concorrente.nome}}</b>
+          </td>
       </tr>
       <tr ng-repeat="(key , value) in respostas">
 	<td class="coluna-fixa"><b>{{key}}</b></td>

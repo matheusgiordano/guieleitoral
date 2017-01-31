@@ -76,7 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.lista-comparacao', {
-      url: '/lista-comparacao/:estado/:cargo',
+      url: '/lista-comparacao/:estado/:cargo/:cargo_descricao',
       views: {
         'tab-home': {
           templateUrl: 'templates/lista-comparacao.html',
@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.quiz', {
-      url: '/quiz/:estado/:cargo',
+      url: '/quiz/:estado/:cargo/:cargo_descricao',
       views: {
         'tab-home': {
           templateUrl: 'templates/quiz.html',

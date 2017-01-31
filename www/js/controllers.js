@@ -3,12 +3,19 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope, Estados, ListaHistorico) {
   $scope.estados = Estados.all();
 
+  ListaHistorico.createDB();
+
   $scope.remove = function(estado) {
     Estados.remove(estado);
   };
 })
 
-.controller('HistoricoCtrl', function($scope) {
+.controller('HistoricoCtrl', function($scope, ListaHistorico) {
+  ListaHistorico.createDB();
+  ListaHistorico.all().then(function (results) {
+    $scope.historicos = results;
+    console.log($scope.historicos);
+  });
 })
 
 /*
@@ -46,8 +53,15 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('TelaDecisaoCtrl', function($scope, $stateParams) {
+.controller('TelaDecisaoCtrl', function($scope, $stateParams, $http) {
     $scope.parametros = $stateParams;
+    var ajaxRequestcargo = $http.get("http://guiaeleitoral.esy.es/cargos_descricao.php?id="+$stateParams.cargo);
+
+    ajaxRequestcargo.success(function(data, status, headers, config){
+      $scope.cargos_descricao = data;
+    });
+    
+
 })
 
 .controller('ListaComparacaoCtrl', function($scope, $http, $stateParams){
@@ -106,7 +120,9 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate) {
+.controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate, ListaHistorico, $q, $rootScope) {
+  // Abre banco de dados local
+  ListaHistorico.createDB();
   // Função que escuta quando as respostas são alteradas para paginar ou marcar as páginações
   angular.element(document).ready(function(){
     jQuery(".item-radio").click(function(){
@@ -151,6 +167,9 @@ angular.module('starter.controllers', [])
   // Requisição com respostas dos candidatos deste cargo e deste estado
   var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php?cargo=" + $stateParams.cargo + "&estado=" + $stateParams.estado);
 
+  var score_compativeis_historico = [];
+  var id_compativeis_historico = [];
+
   ajaxRequest.success(function(data, status, headers, config){
     // Populando array de respostas com resultado
     $scope.respostas_candidatos = data;
@@ -190,9 +209,23 @@ angular.module('starter.controllers', [])
       $scope.compativeis.reverse();
       // Deixa apenas os 5 primeiros elementos dentro do array e descarta os demais
       $scope.compativeis.splice(5);
+
+      // Fuñção que trata os valores de score e id do candidato individualmente para armazenar no histórico 
+      $.each($scope.compativeis, function( key, value ) {
+        var j = 0;
+        for(var i in this){
+          score_compativeis_historico.push(i);
+        }
+
+        for (var i = 0; i < value.length; i++) {
+          if (value[i]) {
+            id_compativeis_historico.push(value[i]);
+          }
+        }
+      });
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
-
+      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, score_compativeis_historico, id_compativeis_historico);
       $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
     };
   });
