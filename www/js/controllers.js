@@ -384,6 +384,6 @@ angular.module('starter.controllers', [])
 
 .controller('TabCtrl', function($scope, $state) {
   $scope.update_state = function(){
-    $state.transitionTo($state.current, {}, {reload: true, inherit: false, notify: true});
+    $state.transitionTo('tab.historico', {}, {reload: true, inherit: false, notify: true});
   }
 });
