@@ -14,7 +14,11 @@ angular.module('starter.controllers', [])
   ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
-    console.log($scope.historicos);
+  });
+
+  ListaHistorico.all_dates().then(function (results) {
+    $scope.historicos_datas = results;
+    console.log($scope.historicos_datas);
   });
 })
 
@@ -223,9 +227,16 @@ angular.module('starter.controllers', [])
           }
         }
       });
+
+      var data_historico = horario_historico();
+
+      function horario_historico(){
+        var d = new Date();
+        return d.toLocaleDateString();
+      }
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
-      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, score_compativeis_historico, id_compativeis_historico);
+      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, score_compativeis_historico, id_compativeis_historico, data_historico);
       $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
     };
   });
@@ -369,4 +380,10 @@ angular.module('starter.controllers', [])
 
 .controller('ErroConexaoCtrl', function($scope) {
 
+})
+
+.controller('TabCtrl', function($scope, $state) {
+  $scope.update_state = function(){
+    $state.transitionTo($state.current, {}, {reload: true, inherit: false, notify: true});
+  }
 });

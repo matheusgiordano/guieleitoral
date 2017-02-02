@@ -7,7 +7,7 @@ angular.module('starter.services', [])
     try{
       db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
       db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER )');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER, data_historico TEXT)');
       });
     }catch(erro){
       alert("Erro: " + erro);
@@ -15,15 +15,20 @@ angular.module('starter.services', [])
     console.log("Banco criado com sucesso !");
   }
   
-  function createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico){
-    console.log(cargo);
-    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"')",
+  function createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico){
+    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5, data_historico) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"', '"+ data_historico +"')",
       defaultResultHandler,
       defaultErrorHandler);
   }
 
   function getHistoricos(){
-    return promisedQuery('SELECT * FROM historico ORDER BY estado DESC',
+    return promisedQuery('SELECT * FROM historico ORDER BY id DESC',
+      defaultResultHandler,
+      defaultErrorHandler);
+  }
+
+  function getDatas(){
+    return promisedQuery('SELECT data_historico FROM historico GROUP BY data_historico ORDER BY id DESC ',
       defaultResultHandler,
       defaultErrorHandler);
   }
@@ -46,6 +51,7 @@ angular.module('starter.services', [])
         var historico = {
           'id'  : results.rows.item(i).id,
           'cargo': results.rows.item(i).id_cargo,
+          'descricao_cargo': results.rows.item(i).descricao_cargo,
           'estado': results.rows.item(i).estado,
           'score_resultado_1': results.rows.item(i).score_resultado_1,
           'id_resultado_1': results.rows.item(i).id_resultado_1,
@@ -56,7 +62,8 @@ angular.module('starter.services', [])
           'score_resultado_4': results.rows.item(i).score_resultado_4,
           'id_resultado_4': results.rows.item(i).id_resultado_4,
           'score_resultado_5': results.rows.item(i).score_resultado_5,
-          'id_resultado_5': results.rows.item(i).id_resultado_5
+          'id_resultado_5': results.rows.item(i).id_resultado_5,
+          'data_historico': results.rows.item(i).data_historico
         };
         outputResults.push(historico);
       }
@@ -66,7 +73,6 @@ angular.module('starter.services', [])
 
 
   function defaultErrorHandler(deferred) {
-    console.log("AQUI");
     return function(tx, results) {
       var len = 0;
       var outputResults = '';
@@ -78,11 +84,14 @@ angular.module('starter.services', [])
     createDB: function(){
       return createDB();
     },
-    create: function(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico) {
-      return createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico);
+    create: function(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico) {
+      return createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico);
     },
     all: function() {
       return getHistoricos();
+    },
+    all_dates: function(){
+      return getDatas();
     }
   };
 
@@ -92,13 +101,13 @@ angular.module('starter.services', [])
   var estados = [{
     id: 0,
     nome: 'Federal',
-    bandeira: 'img/brasil.png',
+    bandeira: 'img/estados/federal.png',
     tipo : "federal"
   },
   {
     id: 1,
     nome: 'Acre',
-    bandeira: 'img/estados/acre.jpg',
+    bandeira: 'img/estados/acre.png',
     tipo: "estadual"
   },
   {

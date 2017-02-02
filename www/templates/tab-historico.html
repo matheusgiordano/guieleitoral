@@ -1,5 +1,32 @@
 <ion-view view-title="Histórico">
-  <ion-content class="padding">
-    <h2>{{historicos.id}}</h2>
+  <ion-content class="padding" style="background-color: #e6e6e6;" id="historico-content">
+    <ion-list>
+    <ion-item-group ng-repeat="data in historicos_datas" id="grupo-data-historico">
+    <div id="box-historico">
+      <div id="box-historico-divider">
+      	<b><h4>{{data.data_historico}}</h4></b>
+      </div>
+  	</div>
+  	<div ng-repeat="historico in historicos" ng-if="data.data_historico === historico.data_historico" id="box-historico">
+  	  <div id="img-estado-historico">
+  	    <img ng-src="img/estados/{{historico.estado.toLowerCase()}}.png">
+  	  </div>
+  	  <div id="conteudo-historico">
+  	  <b>Cargo: </b>{{historico.descricao_cargo}}<br/>
+      <b>Estado: </b>{{historico.estado}}
+  	  </div>
+  	  <div id="scores-historico" ng-if="historico.score_resultado_1 > 0">
+  	  <b>Max Score: </b> <b style="color: orange;">{{historico.score_resultado_1}}0%</b>
+  	  </div>
+  	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 > 0">
+  	  	<a class="button icon-right ion-search button-calm">Resultados</a>
+  	  </div>
+  	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
+  	  	<b style="color: red;">Nenhum candidato compatível.</b>
+  	  </div>
+  	</div>
+    </ion-item-group>
+    </ion-list>
+    
    </ion-content>
 </ion-view>
