@@ -1,5 +1,8 @@
 <ion-view view-title="Histórico">
   <ion-content class="padding" style="background-color: #e6e6e6;" id="historico-content">
+  	<center>
+  	  <b>Atenção:</b> Alterações nas opiniões dos candidatos, não serão registradas nos históricos anteriores.
+  	</center>
     <ion-list>
     <ion-item-group ng-repeat="data in historicos_datas" id="grupo-data-historico">
     <div id="box-historico">
@@ -8,25 +11,33 @@
       </div>
   	</div>
   	<div ng-repeat="historico in historicos" ng-if="data.data_historico === historico.data_historico" id="box-historico">
+  	  <div id="icone-remover-historico" style="position: absolute; right: 5px; font-size: 3px;">
+  	  	<a class="button button-icon icon ion-close"></a>
+  	  </div>
   	  <div id="img-estado-historico">
   	    <img ng-src="img/estados/{{historico.estado.toLowerCase()}}.png">
   	  </div>
   	  <div id="conteudo-historico">
-  	  <b>Cargo: </b>{{historico.descricao_cargo}}<br/>
-      <b>Estado: </b>{{historico.estado}}
+  	    <b>Cargo: </b>{{historico.descricao_cargo}}<br/>
+        <b>Estado: </b>{{historico.estado_nome}}
+        <div ng-if="historico.score_resultado_1 > 0">
+  	      <b>Max Score: </b> <b style="color: orange;">{{historico.score_resultado_1}}0%</b>
+  	    </div>
   	  </div>
-  	  <div id="scores-historico" ng-if="historico.score_resultado_1 > 0">
-  	  <b>Max Score: </b> <b style="color: orange;">{{historico.score_resultado_1}}0%</b>
-  	  </div>
+  	  <br/><br/>
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 > 0">
-  	  	<a class="button icon-right ion-search button-calm">Resultados</a>
+  	  	<a class="button button-outline button-balanced icon ion-search" ng-click="resultados_historico({{historico.score_resultado_1}},{{historico.score_resultado_2}},{{historico.score_resultado_3}},{{historico.score_resultado_4}},{{historico.score_resultado_5}},{{historico.id_resultado_1}},{{historico.id_resultado_2}},{{historico.id_resultado_3}},{{historico.id_resultado_4}},{{historico.id_resultado_5}})">&nbsp;Resultados</a>
+  	  	<br/>
+  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" >&nbsp;Minhas respostas</a>
+  	  	<br/>
   	  </div>
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
   	  	<b style="color: red;">Nenhum candidato compatível.</b>
+
   	  </div>
+  	  <br/>
   	</div>
     </ion-item-group>
     </ion-list>
-    
    </ion-content>
 </ion-view>

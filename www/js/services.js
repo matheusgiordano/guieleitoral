@@ -7,7 +7,7 @@ angular.module('starter.services', [])
     try{
       db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
       db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER, data_historico TEXT)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), estado_nome varchar(40), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER, data_historico TEXT)');
       });
     }catch(erro){
       alert("Erro: " + erro);
@@ -15,8 +15,8 @@ angular.module('starter.services', [])
     console.log("Banco criado com sucesso !");
   }
   
-  function createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico){
-    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5, data_historico) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"', '"+ data_historico +"')",
+  function createHistorico(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico){
+    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, estado_nome, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5, data_historico) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '" + estado_nome + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"', '"+ data_historico +"')",
       defaultResultHandler,
       defaultErrorHandler);
   }
@@ -53,6 +53,7 @@ angular.module('starter.services', [])
           'cargo': results.rows.item(i).id_cargo,
           'descricao_cargo': results.rows.item(i).descricao_cargo,
           'estado': results.rows.item(i).estado,
+          'estado_nome': results.rows.item(i).estado_nome,
           'score_resultado_1': results.rows.item(i).score_resultado_1,
           'id_resultado_1': results.rows.item(i).id_resultado_1,
           'score_resultado_2': results.rows.item(i).score_resultado_2,
@@ -84,8 +85,8 @@ angular.module('starter.services', [])
     createDB: function(){
       return createDB();
     },
-    create: function(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico) {
-      return createHistorico(id_cargo, cargo, estado, score_compativeis_historico, id_compativeis_historico, data_historico);
+    create: function(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico) {
+      return createHistorico(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
     },
     all: function() {
       return getHistoricos();
@@ -101,161 +102,189 @@ angular.module('starter.services', [])
   var estados = [{
     id: 0,
     nome: 'Federal',
+    url: 'federal',
     bandeira: 'img/estados/federal.png',
     tipo : "federal"
   },
   {
     id: 1,
     nome: 'Acre',
+    url: 'acre',
     bandeira: 'img/estados/acre.png',
     tipo: "estadual"
   },
   {
     id: 2,
     nome: 'Alagoas',
+    url: 'alagoas',
     bandeira: 'img/estados/alagoas.png',
     tipo: "estadual"
   },
   {
     id: 3,
     nome: 'Amazonas',
+    url: 'amazonas',
     bandeira: 'img/estados/amazonas.png',
     tipo: "estadual"
   },
   {
     id: 4,
     nome: 'Amapá',
+    url: 'amapa',
     bandeira: 'img/estados/amapa.png',
     tipo: "estadual"
   },
   {
     id: 5,
     nome: 'Bahia',
+    url: 'bahia',
     bandeira: 'img/estados/bahia.png',
     tipo: "estadual"
   },
   {
     id: 6,
     nome: 'Ceará',
+    url: 'ceara',
     bandeira: 'img/estados/ceara.png',
     tipo: "estadual"
   },
   {
     id: 7,
     nome: 'Espírito Santo',
+    url: 'espiritosanto',
     bandeira: 'img/estados/espiritosanto.png',
     tipo: "estadual"
   },
   {
     id: 8,
     nome: 'Goiás',
+    url: 'goias',
     bandeira: 'img/estados/goias.png',
     tipo: "estadual"
   },
   {
     id: 9,
     nome: 'Maranhão',
+    url: 'maranhao',
     bandeira: 'img/estados/maranhao.png',
     tipo: "estadual"
   },
   {
     id: 10,
     nome: 'Mato Grosso',
+    url: 'mato_grosso',
     bandeira: 'img/estados/mato_grosso.png',
     tipo: "estadual"
   },
   {
     id: 11,
     nome: 'Mato Grosso do Sul',
+    url: 'mato_grosso_do_sul',
     bandeira: 'img/estados/mato_grosso_do_sul.png',
     tipo: "estadual"
   },
   {
     id: 12,
     nome: 'Minas Gerais',
+    url: 'minas_gerais',
     bandeira: 'img/estados/minas_gerais.png',
     tipo: "estadual"
   },
   {
     id: 13,
     nome: 'Pará',
-    bandeira: 'img/estados/para.png'
+    url: 'para',
+    bandeira: 'img/estados/para.png',
+    tipo: "estadual"
   },
   {
     id: 14,
     nome: 'Paraíba',
+    url: 'paraiba',
     bandeira: 'img/estados/paraiba.png',
     tipo: "estadual"
   },
   {
     id: 15,
     nome: 'Paraná',
+    url: 'parana',
     bandeira: 'img/estados/parana.png',
     tipo: "estadual"
   },
   {
     id: 16,
     nome: 'Pernambuco',
+    url: 'pernambuco',
     bandeira: 'img/estados/pernambuco.png',
     tipo: "estadual"
   },
   {
     id: 17,
     nome: 'Piauí',
+    url: 'piaui',
     bandeira: 'img/estados/piaui.png',
     tipo: "estadual"
   },
   {
     id: 18,
     nome: 'Rio de Janeiro',
+    url: 'rio_de_janeiro',
     bandeira: 'img/estados/rio_de_janeiro.png',
     tipo: "estadual"
   },
   {
     id: 19,
     nome: 'Rio Grande do Norte',
+    url: 'rio_grande_do_norte',
     bandeira: 'img/estados/rio_grande_do_norte.png',
     tipo: "estadual"
   },
   {
     id: 20,
     nome: 'Rio Grande do Sul',
+    url: 'rio_grande_do_sul',
     bandeira: 'img/estados/rio_grande_do_sul.png',
     tipo: "estadual"
   },
   {
     id: 21,
     nome: 'Rondônia',
+    url: 'rondonia',
     bandeira: 'img/estados/rondonia.png',
     tipo: "estadual"
   },
   {
     id: 22,
     nome: 'Roraima',
+    url: 'roraima',
     bandeira: 'img/estados/roraima.png',
     tipo: "estadual"
   },
   {
     id: 23,
     nome: 'Santa Catarina',
+    url: 'santa_catarina',
     bandeira: 'img/estados/santa_catarina.png',
     tipo: "estadual"
   },
   {
     id: 24,
     nome: 'São Paulo',
+    url: 'sao_paulo',
     bandeira: 'img/estados/sao_paulo.png',
     tipo: "estadual"
   },
   {
     id: 25,
     nome: 'Sergipe',
+    url: 'sergipe',
     bandeira: 'img/estados/sergipe.png',
     tipo: "estadual"
   },
   {
     id: 26,
     nome: 'Tocantins',
+    url: 'tocantins',
     bandeira: 'img/estados/tocantins.png',
     tipo: "estadual"
   }
@@ -271,6 +300,22 @@ angular.module('starter.services', [])
     get: function(tipo) {
       for (var i = 0; i < estados.length; i++) {
         if (estados[i].tipo === tipo) {
+          return estados[i];
+        }
+      }
+      return null;
+    },
+    getNome: function(nome) {
+      for (var i = 0; i < estados.length; i++) {
+        if (estados[i].nome === nome) {
+          return estados[i];
+        }
+      }
+      return null;
+    },    
+    getUrl: function(url) {
+      for (var i = 0; i < estados.length; i++) {
+        if (estados[i].url === url) {
           return estados[i];
         }
       }

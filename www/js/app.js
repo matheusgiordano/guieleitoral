@@ -60,7 +60,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('tab.cargos', {
-      url: '/cargos/:estado',
+      url: '/cargos/:estado/:estado_url',
       views: {
         'tab-home': {
           templateUrl: 'templates/cargos.html',

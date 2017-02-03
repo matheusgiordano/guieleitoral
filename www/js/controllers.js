@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('HistoricoCtrl', function($scope, ListaHistorico) {
+.controller('HistoricoCtrl', function($scope, ListaHistorico, $state) {
   ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
@@ -18,8 +18,38 @@ angular.module('starter.controllers', [])
 
   ListaHistorico.all_dates().then(function (results) {
     $scope.historicos_datas = results;
-    console.log($scope.historicos_datas);
   });
+
+  $scope.resultados_historico = function(score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){
+    $scope.compativeis = [];
+    var array_auxiliar = [];
+    if(score_resultado_1 > 0){
+      array_auxiliar[score_resultado_1] = id_resultado_1.toString();
+      $scope.compativeis.push(array_auxiliar);
+      array_auxiliar = [];
+    }
+    if(score_resultado_2 > 0){
+      array_auxiliar[score_resultado_2] = id_resultado_2.toString();
+      $scope.compativeis.push(array_auxiliar);
+      array_auxiliar = [];
+    }
+    if(score_resultado_3 > 0){
+      array_auxiliar[score_resultado_3] = id_resultado_3.toString();
+      $scope.compativeis.push(array_auxiliar);
+      array_auxiliar = [];
+    }
+    if(score_resultado_4 > 0){
+      array_auxiliar[score_resultado_4] = id_resultado_4.toString();
+      $scope.compativeis.push(array_auxiliar);
+      array_auxiliar = [];
+    }
+    if(score_resultado_5 > 0){
+      array_auxiliar[score_resultado_5] = id_resultado_5.toString();
+      $scope.compativeis.push(array_auxiliar);
+      array_auxiliar = [];
+    }
+    $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
+  }
 })
 
 /*
@@ -44,6 +74,7 @@ angular.module('starter.controllers', [])
 */
 .controller('CargosCtrl', function($scope, $http, $stateParams, Estados) {
      $scope.estado_clicado = Estados.get($stateParams.estado);
+     $scope.estado_nome_clicado = Estados.getUrl($stateParams.estado_url);
      $scope.cargos = [];
      var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/cargos.php?tipo="+$scope.estado_clicado.tipo);
 
@@ -124,7 +155,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate, ListaHistorico, $q, $rootScope) {
+.controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate, ListaHistorico, $q, $rootScope, Estados) {
   // Abre banco de dados local
   ListaHistorico.createDB();
   // Função que escuta quando as respostas são alteradas para paginar ou marcar as páginações
@@ -214,6 +245,8 @@ angular.module('starter.controllers', [])
       // Deixa apenas os 5 primeiros elementos dentro do array e descarta os demais
       $scope.compativeis.splice(5);
 
+      console.log($scope.compativeis);
+
       // Fuñção que trata os valores de score e id do candidato individualmente para armazenar no histórico 
       $.each($scope.compativeis, function( key, value ) {
         var j = 0;
@@ -228,6 +261,8 @@ angular.module('starter.controllers', [])
         }
       });
 
+      var estado_nome = Estados.getUrl($stateParams.estado).nome;
+
       var data_historico = horario_historico();
 
       function horario_historico(){
@@ -236,13 +271,14 @@ angular.module('starter.controllers', [])
       }
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
-      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, score_compativeis_historico, id_compativeis_historico, data_historico);
+      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
       $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
     };
   });
 })
 
 .controller('ResultadoQuizCtrl', function($scope, $stateParams, $http) {
+  console.log($stateParams.compativeis);
   // Recebe parametros dos compativeis
   $scope.compativeis = $stateParams.compativeis;
 
@@ -260,9 +296,9 @@ angular.module('starter.controllers', [])
   $scope.compativeis_consulta = [];
   // Timer para delay de cada requisição ajax
   var timer = 1100;
-
   // Laço para capturar os dados de cada id de candidato que foi retornado como compativel
   $.each($scope.compativeis, function( key, value ) {
+    console.log(key);
     // Laço encarregado de pegar o score deste candidato que está sendo listado
     for(var i in this){
       var score = {"score": i};
