@@ -344,8 +344,11 @@
 #opcoes-historico a{
   width: 100%;
 }
-
-#icone-remover-historico .button-icon .icon:before,#icone-remover-historico .button-icon.icon:before{
+#icone-remover-historico {
+  position: absolute; 
+  right: 5px;
+}
+#icone-remover-historico .button-icon .icon:before, #icone-remover-historico .button-icon.icon:before{
   font-size: 12px;
 }
 

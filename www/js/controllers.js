@@ -10,15 +10,35 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('HistoricoCtrl', function($scope, ListaHistorico, $state) {
+.controller('HistoricoCtrl', function($scope, ListaHistorico, $state, $ionicPopup) {
   ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
   });
+  $scope.load_historicos = function(){
+    ListaHistorico.all_dates().then(function (results) {
+      $scope.historicos_datas = results;
+    });
+  }
 
-  ListaHistorico.all_dates().then(function (results) {
-    $scope.historicos_datas = results;
-  });
+  $scope.load_historicos();
+
+  $scope.remover_historico = function(id){
+    var confirmPopup = $ionicPopup.confirm({
+     title: 'Remover Histórico',
+     template: 'Deseja realmente remover este histórico ?',
+     cancelText: 'Cancelar'
+    });
+
+   confirmPopup.then(function(res) {
+     if(res) { 
+        ListaHistorico.destroy(id).then(function(){
+          $scope.load_historicos();
+          $state.transitionTo('tab.historico', {}, {reload: true, inherit: false, notify: true});
+        });
+     }
+   });
+  };
 
   $scope.resultados_historico = function(score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){
     $scope.compativeis = [];
@@ -245,8 +265,6 @@ angular.module('starter.controllers', [])
       // Deixa apenas os 5 primeiros elementos dentro do array e descarta os demais
       $scope.compativeis.splice(5);
 
-      console.log($scope.compativeis);
-
       // Fuñção que trata os valores de score e id do candidato individualmente para armazenar no histórico 
       $.each($scope.compativeis, function( key, value ) {
         var j = 0;
@@ -278,7 +296,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ResultadoQuizCtrl', function($scope, $stateParams, $http) {
-  console.log($stateParams.compativeis);
   // Recebe parametros dos compativeis
   $scope.compativeis = $stateParams.compativeis;
 
@@ -298,7 +315,6 @@ angular.module('starter.controllers', [])
   var timer = 1100;
   // Laço para capturar os dados de cada id de candidato que foi retornado como compativel
   $.each($scope.compativeis, function( key, value ) {
-    console.log(key);
     // Laço encarregado de pegar o score deste candidato que está sendo listado
     for(var i in this){
       var score = {"score": i};

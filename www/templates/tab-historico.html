@@ -11,8 +11,8 @@
       </div>
   	</div>
   	<div ng-repeat="historico in historicos" ng-if="data.data_historico === historico.data_historico" id="box-historico">
-  	  <div id="icone-remover-historico" style="position: absolute; right: 5px; font-size: 3px;">
-  	  	<a class="button button-icon icon ion-close"></a>
+  	  <div id="icone-remover-historico">
+  	  	<a class="button button-icon icon ion-close" ng-click="remover_historico({{historico.id}})"></a>
   	  </div>
   	  <div id="img-estado-historico">
   	    <img ng-src="img/estados/{{historico.estado.toLowerCase()}}.png">

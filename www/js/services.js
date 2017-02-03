@@ -81,6 +81,12 @@ angular.module('starter.services', [])
     }
   }
 
+  function destroy(id){
+   return promisedQuery("DELETE FROM historico where id = " + id,
+    defaultResultHandler,
+    defaultErrorHandler);
+  }
+
   return {
     createDB: function(){
       return createDB();
@@ -93,6 +99,9 @@ angular.module('starter.services', [])
     },
     all_dates: function(){
       return getDatas();
+    },
+    destroy: function(id){
+      return destroy(id);
     }
   };
 
