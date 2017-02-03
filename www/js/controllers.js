@@ -40,6 +40,21 @@ angular.module('starter.controllers', [])
    });
   };
 
+  $scope.respostas_historico = function(id){
+    if($("#box-respostas-" + id).css('display') == 'none'){
+      $("#box-respostas-" + id).css('display', 'table');
+      ListaHistorico.all_respostas(id).then(function (results) {
+        $scope.respostas_usuario = results;
+        console.log($scope.respostas_usuario);
+      });
+
+      $("#loading-gif").hide();
+      $("#tabela-respostas-usuario").css('display', 'table');
+    }else{
+      $("#box-respostas-" + id).hide();
+    }
+  }
+
   $scope.resultados_historico = function(score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){
     $scope.compativeis = [];
     var array_auxiliar = [];
@@ -230,7 +245,7 @@ angular.module('starter.controllers', [])
     $scope.respostas_candidatos = data;
 
     // Função que é chamada ao finalizar o QUIZ
-    $scope.quiz_perguntas = function(){
+    $scope.quiz_perguntas = function(tamanho_quiz){
       $scope.compativeis = [];
       // Iterator que vai rodar a cada retorno de candidatos(key) com suas respectivas respostas(values)
       $.each($scope.respostas_candidatos, function( key, value ) {
@@ -244,7 +259,7 @@ angular.module('starter.controllers', [])
 
         // Iterator que verificará se o valor da pergunta na tela é compativel com o valor da resposta do candidato, e incrementa 1 ao 
         // contador
-        for(i = 0; i < 10; i++){
+        for(i = 0; i < tamanho_quiz; i++){
           if(value[i] == $("#pergunta-"+i+" input:checked").val()){
             contador_compativeis = contador_compativeis + 1;
           }
@@ -290,6 +305,15 @@ angular.module('starter.controllers', [])
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
       ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
+      ListaHistorico.lastHistorico().then(function (results) {
+        var id_auxiliar = results;
+
+        // Guardando as respsotas do usuário no histórico
+        for(i = 0; i < tamanho_quiz; i++){
+          ListaHistorico.createRespostas(id_auxiliar[0].id ,i+1, $("#pergunta-"+i+" input:checked").val());
+        }
+      });
+
       $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
     };
   });

@@ -352,6 +352,56 @@
   font-size: 12px;
 }
 
+.box-respostas{
+  width: 90%;
+  border: 1px solid #cccccc;
+  margin: auto;
+  display: none;
+}
+
+#loading-gif{
+  width: 100%;
+  text-align: center;
+}
+
+#loading-gif img{
+  height: 200px;
+}
+
+
+#alternativas-historico{
+  width: 25%;
+  float: left;
+  text-align: center;
+  background-color: #33cd5f;
+  color: white;
+  border: 1px solid #33cd5f;
+  height: 50px;
+  display: table;
+}
+
+#alternativas-historico b{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+#perguntas-historico, #respostas-historico{
+  width: 25%;
+  float: left;
+  text-align: center;
+  background-color: white;
+  color: #33cd5f;
+  border: 1px solid #33cd5f;
+  height: 50px;
+  display: table;
+}
+
+#tabela-respostas-usuario{
+  display: none;
+  width: 99%; 
+  margin: auto; 
+}
 /* teste */
 
 

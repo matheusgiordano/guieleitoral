@@ -9,6 +9,9 @@ angular.module('starter.services', [])
       db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), estado_nome varchar(40), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER, data_historico TEXT)');
       });
+      db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resposta (id INTEGER PRIMARY KEY ASC, id_historico INTEGER, pergunta INTEGER, resposta INTEGER)');
+      });
     }catch(erro){
       alert("Erro: " + erro);
     }
@@ -21,11 +24,29 @@ angular.module('starter.services', [])
       defaultErrorHandler);
   }
 
+  function createRespostas(id_historico, pergunta, resposta){
+    return promisedQuery("INSERT INTO historico_resposta(id_historico, pergunta, resposta) VALUES ('" + id_historico + "', '" + pergunta + "', '" + resposta + "')",
+      defaultResultHandlerResposta,
+      defaultErrorHandler);
+  }
+
+  function getRespostas(id){
+    return promisedQuery("SELECT * FROM historico_resposta WHERE id_historico = '"+ id +"'",
+      defaultResultHandlerResposta,
+      defaultErrorHandler);
+  }
+
   function getHistoricos(){
     return promisedQuery('SELECT * FROM historico ORDER BY id DESC',
       defaultResultHandler,
       defaultErrorHandler);
   }
+
+  function lastHistorico(){
+    return promisedQuery('SELECT id FROM historico ORDER BY id DESC LIMIT 1',
+      defaultResultHandler,
+      defaultErrorHandler);
+  }  
 
   function getDatas(){
     return promisedQuery('SELECT data_historico FROM historico GROUP BY data_historico ORDER BY id DESC ',
@@ -39,6 +60,24 @@ angular.module('starter.services', [])
       tx.executeSql(query, [], successCallback(deferred), errorCallback(deferred));
     }, errorCallback);
     return deferred.promise;
+  }
+
+  function defaultResultHandlerResposta(deferred) {
+    return function(tx, results) {
+      var len = results.rows.length,
+      outputResultsRespostas = [];
+
+      for (var i=0; i<len; i++){
+        var historico_resposta = {
+          'id'  : results.rows.item(i).id,
+          'id_historico'  : results.rows.item(i).id_historico,
+          'pergunta': results.rows.item(i).pergunta,
+          'resposta': results.rows.item(i).resposta
+        };
+        outputResultsRespostas.push(historico_resposta);
+      }
+      deferred.resolve(outputResultsRespostas);
+    }
   }
         
 
@@ -94,8 +133,17 @@ angular.module('starter.services', [])
     create: function(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico) {
       return createHistorico(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
     },
+    createRespostas: function(id_historico, pergunta, resposta) {
+      return createRespostas(id_historico, pergunta, resposta);
+    },
+    lastHistorico: function(){
+      return lastHistorico();
+    },
     all: function() {
       return getHistoricos();
+    },
+    all_respostas: function(id) {
+      return getRespostas(id);
     },
     all_dates: function(){
       return getDatas();

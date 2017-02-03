@@ -28,12 +28,48 @@
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 > 0">
   	  	<a class="button button-outline button-balanced icon ion-search" ng-click="resultados_historico({{historico.score_resultado_1}},{{historico.score_resultado_2}},{{historico.score_resultado_3}},{{historico.score_resultado_4}},{{historico.score_resultado_5}},{{historico.id_resultado_1}},{{historico.id_resultado_2}},{{historico.id_resultado_3}},{{historico.id_resultado_4}},{{historico.id_resultado_5}})">&nbsp;Resultados</a>
   	  	<br/>
-  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" >&nbsp;Minhas respostas</a>
+  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}})">&nbsp;Minhas respostas</a>
   	  	<br/>
   	  </div>
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
   	  	<b style="color: red;">Nenhum candidato compatível.</b>
+  	  </div>
 
+
+  	  <div id="box-respostas-{{historico.id}}" class="box-respostas">
+  	  	<div id="loading-gif">
+  	  	  <img ng-src="img/loading.gif" />
+  	  	</div>
+  	  	<div id="tabela-respostas-usuario">
+  	  	<div id="header-historico-respostas">
+  	  		<div id="alternativas-historico" style="border: 0px;">
+    	  	  &nbsp;
+  	  		</div>
+  	  		<div id="alternativas-historico">
+  	  		  <b>Sim</b>
+  	  		</div>
+  	  		<div id="alternativas-historico">
+  	  		  <b>Não</b>
+  	  		</div>
+            <div id="alternativas-historico">
+              <b>Sem posição</b>
+  	  		</div>
+  	  	</div>
+  	  	<div ng-repeat="x in respostas_usuario">
+  	  	  <div id="perguntas-historico" style="background-color: #33cd5f; color: white; line-height: 40px;">
+  	  	    <b>{{$index + 1}}</b>
+  	  	  </div>
+  	  	  <div id="respostas-historico">
+  	  	  	<div ng-if="x.resposta == 1"><a class="button button-icon icon ion-checkmark" style="color: #33cd5f !important;"></a></div>
+  	  	  </div>
+  	  	  <div id="respostas-historico">
+  	  	    <div ng-if="x.resposta == 0"><a class="button button-icon icon ion-checkmark" style="color: #33cd5f !important;"></a></div>
+  	  	  </div>
+  	  	  <div id="respostas-historico">
+  	  	    <div ng-if="x.resposta == 2"><a class="button button-icon icon ion-checkmark" style="color: #33cd5f !important;"></a></div>
+  	  	  </div>
+  	  	</div>
+  	  	</div>
   	  </div>
   	  <br/>
   	</div>
