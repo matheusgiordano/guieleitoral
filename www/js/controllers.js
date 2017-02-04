@@ -42,6 +42,7 @@ angular.module('starter.controllers', [])
 
   $scope.respostas_historico = function(id, cargo){
     if($("#box-respostas-" + id).css('display') == 'none'){
+      $(".box-respostas").hide();
       $("#box-respostas-" + id).css('display', 'table');
       ListaHistorico.all_respostas(id).then(function (results) {
         $scope.respostas_usuario = results;
@@ -56,8 +57,8 @@ angular.module('starter.controllers', [])
         $scope.perguntas = data;
       });
 
-      $("#loading-gif").hide();
-      $("#tabela-respostas-usuario").css('display', 'table');
+      $("#box-respostas-" + id + " #loading-gif").hide();
+      $("#box-respostas-" + id + " #tabela-respostas-usuario").css('display', 'table');
     }else{
       $("#box-respostas-" + id).hide();
     }
