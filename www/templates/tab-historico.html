@@ -28,7 +28,7 @@
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 > 0">
   	  	<a class="button button-outline button-balanced icon ion-search" ng-click="resultados_historico({{historico.score_resultado_1}},{{historico.score_resultado_2}},{{historico.score_resultado_3}},{{historico.score_resultado_4}},{{historico.score_resultado_5}},{{historico.id_resultado_1}},{{historico.id_resultado_2}},{{historico.id_resultado_3}},{{historico.id_resultado_4}},{{historico.id_resultado_5}})">&nbsp;Resultados</a>
   	  	<br/>
-  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}})">&nbsp;Minhas respostas</a>
+  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}},{{historico.cargo}})">&nbsp;Minhas respostas</a>
   	  	<br/>
   	  </div>
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
@@ -37,6 +37,9 @@
 
 
   	  <div id="box-respostas-{{historico.id}}" class="box-respostas">
+  	    <!--<div class="item item-divider">
+    	  Para mais detalhes sobre as perguntas clique na lupa.
+  		</div>-->
   	  	<div id="loading-gif">
   	  	  <img ng-src="img/loading.gif" />
   	  	</div>
@@ -56,7 +59,8 @@
   	  		</div>
   	  	</div>
   	  	<div ng-repeat="x in respostas_usuario">
-  	  	  <div id="perguntas-historico" style="background-color: #33cd5f; color: white; line-height: 40px;">
+  	  	  <div id="perguntas-historico">
+  	  	  	<div id="lupa-detalhes-pergunta"><img ng-src="img/lupa.png" ng-click="popup_pergunta(perguntas[$index], $index)"></div>
   	  	    <b>{{$index + 1}}</b>
   	  	  </div>
   	  	  <div id="respostas-historico">

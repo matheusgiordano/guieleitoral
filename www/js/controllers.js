@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('HistoricoCtrl', function($scope, ListaHistorico, $state, $ionicPopup) {
+.controller('HistoricoCtrl', function($scope, ListaHistorico, $state, $ionicPopup, $http) {
   ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
@@ -40,12 +40,20 @@ angular.module('starter.controllers', [])
    });
   };
 
-  $scope.respostas_historico = function(id){
+  $scope.respostas_historico = function(id, cargo){
     if($("#box-respostas-" + id).css('display') == 'none'){
       $("#box-respostas-" + id).css('display', 'table');
       ListaHistorico.all_respostas(id).then(function (results) {
         $scope.respostas_usuario = results;
-        console.log($scope.respostas_usuario);
+      });
+
+      // Array com perguntas
+      $scope.perguntas = [];
+      // Requisição com perguntas referentes a este cargo
+      var ajaxRequest_respostas = $http.get("http://guiaeleitoral.esy.es/perguntas_cargo.php?cargo=" + cargo);
+      // Populando array de perguntas com resultado
+      ajaxRequest_respostas.success(function(data, status, headers, config){
+        $scope.perguntas = data;
       });
 
       $("#loading-gif").hide();
@@ -53,6 +61,14 @@ angular.module('starter.controllers', [])
     }else{
       $("#box-respostas-" + id).hide();
     }
+  }
+
+  $scope.popup_pergunta = function(texto, indice){
+    var indice_popup = indice + 1;
+    var alertPopup = $ionicPopup.alert({
+      title: 'Pergunta ' + indice_popup,
+      template: texto
+    });
   }
 
   $scope.resultados_historico = function(score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){

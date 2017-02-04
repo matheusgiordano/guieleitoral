@@ -353,7 +353,7 @@
 }
 
 .box-respostas{
-  width: 90%;
+  width: 95%;
   border: 1px solid #cccccc;
   margin: auto;
   display: none;
@@ -390,17 +390,40 @@
   width: 25%;
   float: left;
   text-align: center;
-  background-color: white;
-  color: #33cd5f;
   border: 1px solid #33cd5f;
   height: 50px;
   display: table;
 }
+#respostas-historico{
+  background-color: white;
+  color: #33cd5f;
+}
+
+#perguntas-historico{
+  background-color: #33cd5f; 
+  color: white; 
+  line-height: 40px;
+  font-size: 18px;
+  position: relative;
+}
 
 #tabela-respostas-usuario{
   display: none;
-  width: 99%; 
-  margin: auto; 
+  width: 90%; 
+  float: right;
+}
+
+#lupa-detalhes-pergunta{
+  position: relative;
+  left: -5px;
+}
+
+#lupa-detalhes-pergunta img{
+  position: absolute;
+  width: 40px;
+  z-index: 999;
+  left: -45%;
+  line-height: 40px;
 }
 /* teste */
 
