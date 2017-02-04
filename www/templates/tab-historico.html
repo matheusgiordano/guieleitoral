@@ -33,6 +33,9 @@
   	  </div>
   	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
   	  	<b style="color: red;">Nenhum candidato compatível.</b>
+	    <br/>
+  	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}},{{historico.cargo}})">&nbsp;Minhas respostas</a>
+  	  	<br/>
   	  </div>
 
 
