@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope, Estados, ListaHistorico) {
+.controller('HomeCtrl', function($scope, Estados, ListaHistorico, $ionicPopup) {
+  var alertPopup = $ionicPopup.alert({
+    title: 'Atenção !',
+    template: "Aplicativo elaborado para fins acadêmicos.<br/><br/> Todos os dados relacionados a opiniões dos candidatos não devem ser associados ao cenário político real."
+  });
   $scope.estados = Estados.all();
 
   ListaHistorico.createDB();
@@ -310,6 +314,10 @@ angular.module('starter.controllers', [])
           }
         }
       });
+
+      for(i = 0; i < 5; i++){
+        ListaHistorico.createResultado(id_compativeis_historico[i], score_compativeis_historico[i]);
+      }
 
       var estado_nome = Estados.getUrl($stateParams.estado).nome;
 

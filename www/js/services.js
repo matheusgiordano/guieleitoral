@@ -12,6 +12,9 @@ angular.module('starter.services', [])
       db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resposta (id INTEGER PRIMARY KEY ASC, id_historico INTEGER, pergunta INTEGER, resposta INTEGER)');
       });
+      db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resultado (id INTEGER PRIMARY KEY ASC, id_candidato INTEGER, score INTEGER)');
+      });
     }catch(erro){
       alert("Erro: " + erro);
     }
@@ -27,6 +30,12 @@ angular.module('starter.services', [])
   function createRespostas(id_historico, pergunta, resposta){
     return promisedQuery("INSERT INTO historico_resposta(id_historico, pergunta, resposta) VALUES ('" + id_historico + "', '" + pergunta + "', '" + resposta + "')",
       defaultResultHandlerResposta,
+      defaultErrorHandler);
+  }
+
+  function createResultado(id_candidato, score){
+    return promisedQuery("INSERT INTO historico_resultado(id_candidato, score) VALUES ('" + id_candidato + "', '" + score + "')",
+      defaultResultHandlerResultado,
       defaultErrorHandler);
   }
 
@@ -60,6 +69,24 @@ angular.module('starter.services', [])
       tx.executeSql(query, [], successCallback(deferred), errorCallback(deferred));
     }, errorCallback);
     return deferred.promise;
+  }
+
+  function defaultResultHandlerResultado(deferred) {
+    return function(tx, results) {
+      var len = results.rows.length,
+      outputResultsResultado = [];
+
+      for (var i=0; i<len; i++){
+        var historico_resultado = {
+          'id'  : results.rows.item(i).id,
+          'id_candidato'  : results.rows.item(i).id_candidato,
+          'score': results.rows.item(i).score
+        };
+        outputResultsResultado.push(historico_resultado);
+        console.log(historico_resultado);
+      }
+      deferred.resolve(outputResultsResultado);
+    }
   }
 
   function defaultResultHandlerResposta(deferred) {
@@ -120,7 +147,14 @@ angular.module('starter.services', [])
     }
   }
 
+  function destroy_respostas(id){
+   return promisedQuery("DELETE FROM historico_resposta where id_historico = " + id,
+    defaultResultHandler,
+    defaultErrorHandler); 
+  }
+  
   function destroy(id){
+   destroy_respostas(id);
    return promisedQuery("DELETE FROM historico where id = " + id,
     defaultResultHandler,
     defaultErrorHandler);
@@ -135,6 +169,9 @@ angular.module('starter.services', [])
     },
     createRespostas: function(id_historico, pergunta, resposta) {
       return createRespostas(id_historico, pergunta, resposta);
+    },
+    createResultado: function(id_candidato, score) {
+      return createResultado(id_candidato, score);
     },
     lastHistorico: function(){
       return lastHistorico();
