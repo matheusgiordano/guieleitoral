@@ -7,13 +7,13 @@ angular.module('starter.services', [])
     try{
       db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
       db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), estado_nome varchar(40), score_resultado_1 INTEGER, id_resultado_1 INTEGER, score_resultado_2 INTEGER, id_resultado_2 INTEGER, score_resultado_3 INTEGER, id_resultado_3 INTEGER, score_resultado_4 INTEGER, id_resultado_4 INTEGER, score_resultado_5 INTEGER, id_resultado_5 INTEGER, data_historico TEXT)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), estado_nome varchar(40), data_historico TEXT)');
       });
       db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resposta (id INTEGER PRIMARY KEY ASC, id_historico INTEGER, pergunta INTEGER, resposta INTEGER)');
       });
       db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resultado (id INTEGER PRIMARY KEY ASC, id_candidato INTEGER, score INTEGER)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS historico_resultado (id INTEGER PRIMARY KEY ASC, id_historico INTEGER, id_candidato INTEGER, score INTEGER)');
       });
     }catch(erro){
       alert("Erro: " + erro);
@@ -21,8 +21,8 @@ angular.module('starter.services', [])
     console.log("Banco criado com sucesso !");
   }
   
-  function createHistorico(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico){
-    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, estado_nome, score_resultado_1, id_resultado_1, score_resultado_2, id_resultado_2, score_resultado_3, id_resultado_3, score_resultado_4, id_resultado_4, score_resultado_5, id_resultado_5, data_historico) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '" + estado_nome + "', '"+ score_compativeis_historico[0] + "', '"+ id_compativeis_historico[0] + "', '"+ score_compativeis_historico[1] +"', '"+ id_compativeis_historico[1] +"', '"+ score_compativeis_historico[2] +"', '"+ id_compativeis_historico[2] +"', '"+ score_compativeis_historico[3] +"', '"+ id_compativeis_historico[3] +"', '"+ score_compativeis_historico[4] +"', '"+ score_compativeis_historico[4] +"', '"+ data_historico +"')",
+  function createHistorico(id_cargo, cargo, estado, estado_nome, data_historico){
+    return promisedQuery("INSERT INTO historico(id_cargo, descricao_cargo, estado, estado_nome, data_historico) VALUES ('" + id_cargo + "', '" + cargo + "', '"+ estado + "', '" + estado_nome + "', '"+ data_historico +"')",
       defaultResultHandler,
       defaultErrorHandler);
   }
@@ -33,8 +33,8 @@ angular.module('starter.services', [])
       defaultErrorHandler);
   }
 
-  function createResultado(id_candidato, score){
-    return promisedQuery("INSERT INTO historico_resultado(id_candidato, score) VALUES ('" + id_candidato + "', '" + score + "')",
+  function createResultado(id_historico, id_candidato, score){
+    return promisedQuery("INSERT INTO historico_resultado(id_historico, id_candidato, score) VALUES ('"+ id_historico + "', '"  + id_candidato + "', '" + score + "')",
       defaultResultHandlerResultado,
       defaultErrorHandler);
   }
@@ -45,8 +45,14 @@ angular.module('starter.services', [])
       defaultErrorHandler);
   }
 
+  function getResultados(id){
+    return promisedQuery("SELECT * FROM historico_resultado WHERE id_historico = '"+ id +"'",
+      defaultResultHandlerResultado,
+      defaultErrorHandler);
+  }
+
   function getHistoricos(){
-    return promisedQuery('SELECT * FROM historico ORDER BY id DESC',
+    return promisedQuery('SELECT * FROM historico INNER JOIN historico_resultado ON historico.id = historico_resultado.id_historico ORDER BY id DESC ',
       defaultResultHandler,
       defaultErrorHandler);
   }
@@ -79,11 +85,11 @@ angular.module('starter.services', [])
       for (var i=0; i<len; i++){
         var historico_resultado = {
           'id'  : results.rows.item(i).id,
-          'id_candidato'  : results.rows.item(i).id_candidato,
-          'score': results.rows.item(i).score
+          'id_historico'  : results.rows.item(i).id_historico,
+          'id_candidato' : results.rows.item(i).id_candidato,
+          'score' : results.rows.item(i).score
         };
         outputResultsResultado.push(historico_resultado);
-        console.log(historico_resultado);
       }
       deferred.resolve(outputResultsResultado);
     }
@@ -120,16 +126,6 @@ angular.module('starter.services', [])
           'descricao_cargo': results.rows.item(i).descricao_cargo,
           'estado': results.rows.item(i).estado,
           'estado_nome': results.rows.item(i).estado_nome,
-          'score_resultado_1': results.rows.item(i).score_resultado_1,
-          'id_resultado_1': results.rows.item(i).id_resultado_1,
-          'score_resultado_2': results.rows.item(i).score_resultado_2,
-          'id_resultado_2': results.rows.item(i).id_resultado_2,
-          'score_resultado_3': results.rows.item(i).score_resultado_3,
-          'id_resultado_3': results.rows.item(i).id_resultado_3,
-          'score_resultado_4': results.rows.item(i).score_resultado_4,
-          'id_resultado_4': results.rows.item(i).id_resultado_4,
-          'score_resultado_5': results.rows.item(i).score_resultado_5,
-          'id_resultado_5': results.rows.item(i).id_resultado_5,
           'data_historico': results.rows.item(i).data_historico
         };
         outputResults.push(historico);
@@ -164,14 +160,14 @@ angular.module('starter.services', [])
     createDB: function(){
       return createDB();
     },
-    create: function(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico) {
-      return createHistorico(id_cargo, cargo, estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
+    create: function(id_cargo, cargo, estado, estado_nome, data_historico) {
+      return createHistorico(id_cargo, cargo, estado, estado_nome, data_historico);
     },
     createRespostas: function(id_historico, pergunta, resposta) {
       return createRespostas(id_historico, pergunta, resposta);
     },
-    createResultado: function(id_candidato, score) {
-      return createResultado(id_candidato, score);
+    createResultado: function(id_historico, id_candidato, score) {
+      return createResultado(id_historico, id_candidato, score);
     },
     lastHistorico: function(){
       return lastHistorico();
@@ -181,6 +177,9 @@ angular.module('starter.services', [])
     },
     all_respostas: function(id) {
       return getRespostas(id);
+    },
+    all_resultados: function(id) {
+      return getResultados(id);
     },
     all_dates: function(){
       return getDatas();

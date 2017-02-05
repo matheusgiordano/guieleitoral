@@ -76,35 +76,22 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $scope.resultados_historico = function(score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){
+  $scope.resultados_historico = function(id, score_resultado_1, score_resultado_2, score_resultado_3, score_resultado_4, score_resultado_5, id_resultado_1, id_resultado_2, id_resultado_3, id_resultado_4, id_resultado_5){
+
     $scope.compativeis = [];
     var array_auxiliar = [];
-    if(score_resultado_1 > 0){
-      array_auxiliar[score_resultado_1] = id_resultado_1.toString();
-      $scope.compativeis.push(array_auxiliar);
-      array_auxiliar = [];
-    }
-    if(score_resultado_2 > 0){
-      array_auxiliar[score_resultado_2] = id_resultado_2.toString();
-      $scope.compativeis.push(array_auxiliar);
-      array_auxiliar = [];
-    }
-    if(score_resultado_3 > 0){
-      array_auxiliar[score_resultado_3] = id_resultado_3.toString();
-      $scope.compativeis.push(array_auxiliar);
-      array_auxiliar = [];
-    }
-    if(score_resultado_4 > 0){
-      array_auxiliar[score_resultado_4] = id_resultado_4.toString();
-      $scope.compativeis.push(array_auxiliar);
-      array_auxiliar = [];
-    }
-    if(score_resultado_5 > 0){
-      array_auxiliar[score_resultado_5] = id_resultado_5.toString();
-      $scope.compativeis.push(array_auxiliar);
-      array_auxiliar = [];
-    }
-    $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
+
+    ListaHistorico.all_resultados(id).then(function (results) {
+      $scope.resultados_usuario = results;
+      $.each($scope.resultados_usuario, function( key, value ) {
+        if(value.score > 0){
+          array_auxiliar[value.score] = value.id_candidato.toString();
+          $scope.compativeis.push(array_auxiliar);
+          array_auxiliar = [];
+        }
+      });
+      $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
+    });
   }
 })
 
@@ -314,11 +301,6 @@ angular.module('starter.controllers', [])
           }
         }
       });
-
-      for(i = 0; i < 5; i++){
-        ListaHistorico.createResultado(id_compativeis_historico[i], score_compativeis_historico[i]);
-      }
-
       var estado_nome = Estados.getUrl($stateParams.estado).nome;
 
       var data_historico = horario_historico();
@@ -329,7 +311,7 @@ angular.module('starter.controllers', [])
       }
       // Redireciona para a tela dos compativeis
       //location.href = "#/tab/resultado-quiz/";
-      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, estado_nome, score_compativeis_historico, id_compativeis_historico, data_historico);
+      ListaHistorico.create($stateParams.cargo, $stateParams.cargo_descricao, $stateParams.estado, estado_nome, data_historico);
       ListaHistorico.lastHistorico().then(function (results) {
         var id_auxiliar = results;
 
@@ -337,6 +319,12 @@ angular.module('starter.controllers', [])
         for(i = 0; i < tamanho_quiz; i++){
           ListaHistorico.createRespostas(id_auxiliar[0].id ,i+1, $("#pergunta-"+i+" input:checked").val());
         }
+
+
+        for(i = 0; i < 5; i++){
+          ListaHistorico.createResultado(id_auxiliar[0].id, id_compativeis_historico[i], score_compativeis_historico[i]);
+        }
+
       });
 
       $state.go('tab.resultado-quiz', {'compativeis': $scope.compativeis});
