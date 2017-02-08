@@ -52,7 +52,7 @@ angular.module('starter.services', [])
   }
 
   function getHistoricos(){
-    return promisedQuery('SELECT * FROM historico INNER JOIN historico_resultado ON historico.id = historico_resultado.id_historico ORDER BY id DESC ',
+    return promisedQuery('SELECT * FROM historico ORDER BY id DESC ',
       defaultResultHandler,
       defaultErrorHandler);
   }

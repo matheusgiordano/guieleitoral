@@ -18,6 +18,11 @@ angular.module('starter.controllers', [])
   ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
+    $.each($scope.historicos, function(key, value){
+      ListaHistorico.all_resultados(value.id).then(function (results) { 
+        $scope.historicos_resultado = Object.assign(value, results);
+      });
+    });
   });
   $scope.load_historicos = function(){
     ListaHistorico.all_dates().then(function (results) {

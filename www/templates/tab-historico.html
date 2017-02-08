@@ -20,18 +20,18 @@
   	  <div id="conteudo-historico">
   	    <b>Cargo: </b>{{historico.descricao_cargo}}<br/>
         <b>Estado: </b>{{historico.estado_nome}}
-        <div ng-if="historico.score_resultado_1 > 0">
-  	      <b>Max Score: </b> <b style="color: orange;">{{historico.score_resultado_1}}0%</b>
+        <div ng-if="historico[0].score > 0">
+  	      <b>Max Score: </b> <b style="color: orange;">{{historico[0].score}}0%</b>
   	    </div>
   	  </div>
   	  <br/><br/>
-  	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 > 0">
-  	  	<a class="button button-outline button-balanced icon ion-search" ng-click="resultados_historico({{historico.id}},{{historico.score_resultado_1}},{{historico.score_resultado_2}},{{historico.score_resultado_3}},{{historico.score_resultado_4}},{{historico.score_resultado_5}},{{historico.id_resultado_1}},{{historico.id_resultado_2}},{{historico.id_resultado_3}},{{historico.id_resultado_4}},{{historico.id_resultado_5}})">&nbsp;Resultados</a>
+  	  <div id="opcoes-historico" ng-if="historico[0].score > 0">
+  	  	<a class="button button-outline button-balanced icon ion-search" ng-click="resultados_historico({{historico.id}},{{historico[0].score}},{{historico[1].score}},{{historico[2].score}},{{historico[3].score}},{{historico[4].score}},{{historico[0].id_candidato}},{{historico[1].id_candidato}},{{historico[2].id_candidato}},{{historico[3].id_candidato}},{{historico[4].id_candidato}})">&nbsp;Resultados</a>
   	  	<br/>
   	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}},{{historico.cargo}})">&nbsp;Minhas respostas</a>
   	  	<br/>
   	  </div>
-  	  <div id="opcoes-historico" ng-if="historico.score_resultado_1 == 'undefined'">
+  	  <div id="opcoes-historico" ng-if="historico[0].score == 'undefined'">
   	  	<b style="color: red;">Nenhum candidato compatível.</b>
 	    <br/>
   	  	<a class="button button-outline button-balanced icon ion-android-checkbox-outline" ng-click="respostas_historico({{historico.id}},{{historico.cargo}})">&nbsp;Minhas respostas</a>
@@ -40,9 +40,6 @@
 
 
   	  <div id="box-respostas-{{historico.id}}" class="box-respostas">
-  	    <!--<div class="item item-divider">
-    	  Para mais detalhes sobre as perguntas clique na lupa.
-  		</div>-->
   	  	<div id="loading-gif">
   	  	  <img ng-src="img/loading.gif" />
   	  	</div>
