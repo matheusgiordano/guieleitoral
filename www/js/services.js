@@ -196,6 +196,7 @@ angular.module('starter.services', [])
     id: 0,
     nome: 'Federal',
     url: 'federal',
+    sigla: 'BR',
     bandeira: 'img/estados/federal.png',
     tipo : "federal"
   },
@@ -203,6 +204,7 @@ angular.module('starter.services', [])
     id: 1,
     nome: 'Acre',
     url: 'acre',
+    sigla: 'AC',
     bandeira: 'img/estados/acre.png',
     tipo: "estadual"
   },
@@ -210,27 +212,31 @@ angular.module('starter.services', [])
     id: 2,
     nome: 'Alagoas',
     url: 'alagoas',
+    sigla: 'AL',
     bandeira: 'img/estados/alagoas.png',
     tipo: "estadual"
   },
   {
     id: 3,
-    nome: 'Amazonas',
-    url: 'amazonas',
-    bandeira: 'img/estados/amazonas.png',
+    nome: 'Amapá',
+    url: 'amapa',
+    sigla: 'AP',
+    bandeira: 'img/estados/amapa.png',
     tipo: "estadual"
   },
   {
     id: 4,
-    nome: 'Amapá',
-    url: 'amapa',
-    bandeira: 'img/estados/amapa.png',
+    nome: 'Amazonas',
+    url: 'amazonas',
+    sigla: 'AM',
+    bandeira: 'img/estados/amazonas.png',
     tipo: "estadual"
   },
   {
     id: 5,
     nome: 'Bahia',
     url: 'bahia',
+    sigla: 'BA',
     bandeira: 'img/estados/bahia.png',
     tipo: "estadual"
   },
@@ -238,146 +244,175 @@ angular.module('starter.services', [])
     id: 6,
     nome: 'Ceará',
     url: 'ceara',
+    sigla: 'CE',
     bandeira: 'img/estados/ceara.png',
     tipo: "estadual"
   },
   {
     id: 7,
-    nome: 'Espírito Santo',
-    url: 'espiritosanto',
-    bandeira: 'img/estados/espiritosanto.png',
+    nome: 'Distrito Federal',
+    url: 'distrito_federal',
+    sigla: 'DF',
+    bandeira: 'img/estados/distrito_federal.png',
     tipo: "estadual"
   },
   {
     id: 8,
-    nome: 'Goiás',
-    url: 'goias',
-    bandeira: 'img/estados/goias.png',
+    nome: 'Espírito Santo',
+    url: 'espiritosanto',
+    sigla: 'ES',
+    bandeira: 'img/estados/espiritosanto.png',
     tipo: "estadual"
   },
   {
     id: 9,
-    nome: 'Maranhão',
-    url: 'maranhao',
-    bandeira: 'img/estados/maranhao.png',
+    nome: 'Goiás',
+    url: 'goias',
+    sigla: 'GO',
+    bandeira: 'img/estados/goias.png',
     tipo: "estadual"
   },
   {
     id: 10,
-    nome: 'Mato Grosso',
-    url: 'mato_grosso',
-    bandeira: 'img/estados/mato_grosso.png',
+    nome: 'Maranhão',
+    url: 'maranhao',
+    sigla: 'MA',
+    bandeira: 'img/estados/maranhao.png',
     tipo: "estadual"
   },
   {
     id: 11,
-    nome: 'Mato Grosso do Sul',
-    url: 'mato_grosso_do_sul',
-    bandeira: 'img/estados/mato_grosso_do_sul.png',
+    nome: 'Mato Grosso',
+    url: 'mato_grosso',
+    sigla: 'MT',
+    bandeira: 'img/estados/mato_grosso.png',
     tipo: "estadual"
   },
   {
     id: 12,
-    nome: 'Minas Gerais',
-    url: 'minas_gerais',
-    bandeira: 'img/estados/minas_gerais.png',
+    nome: 'Mato Grosso do Sul',
+    url: 'mato_grosso_do_sul',
+    sigla: 'MS',
+    bandeira: 'img/estados/mato_grosso_do_sul.png',
     tipo: "estadual"
   },
   {
     id: 13,
-    nome: 'Pará',
-    url: 'para',
-    bandeira: 'img/estados/para.png',
+    nome: 'Minas Gerais',
+    url: 'minas_gerais',
+    sigla: 'MG',
+    bandeira: 'img/estados/minas_gerais.png',
     tipo: "estadual"
   },
   {
     id: 14,
-    nome: 'Paraíba',
-    url: 'paraiba',
-    bandeira: 'img/estados/paraiba.png',
+    nome: 'Pará',
+    url: 'para',
+    sigla: 'PA',
+    bandeira: 'img/estados/para.png',
     tipo: "estadual"
   },
   {
     id: 15,
-    nome: 'Paraná',
-    url: 'parana',
-    bandeira: 'img/estados/parana.png',
+    nome: 'Paraíba',
+    url: 'paraiba',
+    sigla: 'PB',
+    bandeira: 'img/estados/paraiba.png',
     tipo: "estadual"
   },
   {
     id: 16,
-    nome: 'Pernambuco',
-    url: 'pernambuco',
-    bandeira: 'img/estados/pernambuco.png',
+    nome: 'Paraná',
+    url: 'parana',
+    sigla: 'PR',
+    bandeira: 'img/estados/parana.png',
     tipo: "estadual"
   },
   {
     id: 17,
-    nome: 'Piauí',
-    url: 'piaui',
-    bandeira: 'img/estados/piaui.png',
+    nome: 'Pernambuco',
+    url: 'pernambuco',
+    sigla: 'PE',
+    bandeira: 'img/estados/pernambuco.png',
     tipo: "estadual"
   },
   {
     id: 18,
-    nome: 'Rio de Janeiro',
-    url: 'rio_de_janeiro',
-    bandeira: 'img/estados/rio_de_janeiro.png',
+    nome: 'Piauí',
+    url: 'piaui',
+    sigla: 'PI',
+    bandeira: 'img/estados/piaui.png',
     tipo: "estadual"
   },
   {
     id: 19,
-    nome: 'Rio Grande do Norte',
-    url: 'rio_grande_do_norte',
-    bandeira: 'img/estados/rio_grande_do_norte.png',
+    nome: 'Rio de Janeiro',
+    url: 'rio_de_janeiro',
+    sigla: 'RJ',
+    bandeira: 'img/estados/rio_de_janeiro.png',
     tipo: "estadual"
   },
   {
     id: 20,
-    nome: 'Rio Grande do Sul',
-    url: 'rio_grande_do_sul',
-    bandeira: 'img/estados/rio_grande_do_sul.png',
+    nome: 'Rio Grande do Norte',
+    url: 'rio_grande_do_norte',
+    sigla: 'RN',
+    bandeira: 'img/estados/rio_grande_do_norte.png',
     tipo: "estadual"
   },
   {
     id: 21,
-    nome: 'Rondônia',
-    url: 'rondonia',
-    bandeira: 'img/estados/rondonia.png',
+    nome: 'Rio Grande do Sul',
+    url: 'rio_grande_do_sul',
+    sigla: 'RS',
+    bandeira: 'img/estados/rio_grande_do_sul.png',
     tipo: "estadual"
   },
   {
     id: 22,
-    nome: 'Roraima',
-    url: 'roraima',
-    bandeira: 'img/estados/roraima.png',
+    nome: 'Rondônia',
+    url: 'rondonia',
+    sigla: 'RO',
+    bandeira: 'img/estados/rondonia.png',
     tipo: "estadual"
   },
   {
     id: 23,
-    nome: 'Santa Catarina',
-    url: 'santa_catarina',
-    bandeira: 'img/estados/santa_catarina.png',
+    nome: 'Roraima',
+    url: 'roraima',
+    sigla: 'RR',
+    bandeira: 'img/estados/roraima.png',
     tipo: "estadual"
   },
   {
     id: 24,
-    nome: 'São Paulo',
-    url: 'sao_paulo',
-    bandeira: 'img/estados/sao_paulo.png',
+    nome: 'Santa Catarina',
+    url: 'santa_catarina',
+    sigla: 'SC',
+    bandeira: 'img/estados/santa_catarina.png',
     tipo: "estadual"
   },
   {
     id: 25,
-    nome: 'Sergipe',
-    url: 'sergipe',
-    bandeira: 'img/estados/sergipe.png',
+    nome: 'São Paulo',
+    url: 'sao_paulo',
+    sigla: 'SP',
+    bandeira: 'img/estados/sao_paulo.png',
     tipo: "estadual"
   },
   {
     id: 26,
+    nome: 'Sergipe',
+    url: 'sergipe',
+    sigla: 'SE',
+    bandeira: 'img/estados/sergipe.png',
+    tipo: "estadual"
+  },
+  {
+    id: 27,
     nome: 'Tocantins',
     url: 'tocantins',
+    sigla: 'TO',
     bandeira: 'img/estados/tocantins.png',
     tipo: "estadual"
   }

@@ -147,13 +147,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ListaComparacaoCtrl', function($scope, $http, $stateParams){
+.controller('ListaComparacaoCtrl', function($scope, $http, $stateParams, Estados){
     $scope.estado = $stateParams.estado;
+    $scope.nome_estado = Estados.getUrl($scope.estado);
     $scope.cargo  = $stateParams.cargo;
    
     $scope.candidatos = [];
 
-    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php?estado="+$scope.estado+"&cargo=" + $scope.cargo);
+    var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos.php?estado="+$scope.nome_estado.sigla +"&cargo=" + $scope.cargo);
      
     ajaxRequest.success(function(data, status, headers, config){
       $scope.candidatos = data;
@@ -248,7 +249,8 @@ angular.module('starter.controllers', [])
   // Array com respostas
   $scope.respostas_candidatos = [];
   // Requisição com respostas dos candidatos deste cargo e deste estado
-  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php?cargo=" + $stateParams.cargo + "&estado=" + $stateParams.estado);
+  var estado_sigla = Estados.getUrl($stateParams.estado).sigla;
+  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/select_quiz.php?cargo=" + $stateParams.cargo + "&estado=" + estado_sigla);
 
   var score_compativeis_historico = [];
   var id_compativeis_historico = [];
@@ -383,83 +385,106 @@ angular.module('starter.controllers', [])
 })  
 
 .controller('FixaCtrl', function($scope, $stateParams, $http, $q, $timeout) {
-  $scope.candidatos = [];
-  $scope.data = {"result" : [], "search" : []};
-  var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos_all.php");
-
-  ajaxRequest.success(function(data, status, headers, config){
-    $scope.candidatos = data;
-
-    // Transformando o retorno do requisição AJAX em Array
-    var array = $.map($scope.candidatos, function(value, index) {
-      return [value];
-    });
-
     // Evento para digitação no campo de busca
     $("#input-busca").keyup(function(){
-      // Setando o valor do que foi digitado
-      filtro = $("#input-busca").val();
+      valor_input = $("#input-busca").val();
+      filtro_tamanho = valor_input.length;
+      if(filtro_tamanho >= 2){
+        // Setando o valor do que foi digitado
+        filtro = $("#input-busca").val();
 
-      // Criando a busca de candidatos
-      var searchCandidatos = function(searchFilter) {
-        // Instnaciando variável de consulta Angular
-        var deferred = $q.defer();
+        $scope.candidatos = [];
+        $scope.data = {"result" : [], "search" : []};
+        var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos_all.php?filtro="+filtro.toLowerCase());
 
-        // Função da busca que vai comparar cada letra se existe um candidato que contêm aquela string
-        function matcheBusca (candidato) {
-	    	  if(candidato[1].toLowerCase().indexOf(filtro.toLowerCase()) !== -1 ) return true;
-	       };
+        ajaxRequest.success(function(data, status, headers, config){
+          $scope.candidatos = data;
 
-        // Filtra dentro do array e retorn dentro da variável "matches" somente aqueles candidatos compativeis a string digitada
-        var matches = array.filter(matcheBusca);
+          // Transformando o retorno do requisição AJAX em Array
+          var array = $.map($scope.candidatos, function(value, index) {
+            return [value];
+          });
 
-        // Função de timeout que vai resolver e retornar os dados a cada instância de tempo
-        $timeout( function(){
-          deferred.resolve(matches);
-        }, 100);
-          return deferred.promise;
+
+          // Criando a busca de candidatos
+          var searchCandidatos = function(searchFilter) {
+            // Instnaciando variável de consulta Angular
+            var deferred = $q.defer();
+
+            // Função da busca que vai comparar cada letra se existe um candidato que contêm aquela string
+            function matcheBusca (candidato) {
+    	    	  if(candidato[1].toLowerCase().indexOf(filtro.toLowerCase()) !== -1 ) return true;
+    	       };
+
+            // Filtra dentro do array e retorn dentro da variável "matches" somente aqueles candidatos compativeis a string digitada
+            var matches = array.filter(matcheBusca);
+
+            // Função de timeout que vai resolver e retornar os dados a cada instância de tempo
+            $timeout( function(){
+              deferred.resolve(matches);
+            }, 100);
+              return deferred.promise;
+          }
+
+          // Função que vai jogar os encontrados dentro de uma variável "result"
+          searchCandidatos($scope.data.search).then(
+            function(matches){
+              $scope.data.result = matches;
+            }
+          );
+        });
       }
-
-      // Função que vai jogar os encontrados dentro de uma variável "result"
-      searchCandidatos($scope.data.search).then(
-        function(matches){
-          $scope.data.result = matches;
-        }
-      );
     });
     // Evento para digitação no campo de busca
     $("#input-busca").keypress(function(){
-      // Setando o valor do que foi digitado
-      filtro = $("#input-busca").val();
+      valor_input = $("#input-busca").val();
+      filtro_tamanho = valor_input.length;
+      if(filtro_tamanho >= 2){
+        // Setando o valor do que foi digitado
+        filtro = $("#input-busca").val();
 
-      // Criando a busca de candidatos
-      var searchCandidatos = function(searchFilter) {
-        // Instnaciando variável de consulta Angular
-        var deferred = $q.defer();
+        $scope.candidatos = [];
+        $scope.data = {"result" : [], "search" : []};
+        var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/candidatos_all.php?filtro="+filtro.toLowerCase());
 
-        // Função da busca que vai comparar cada letra se existe um candidato que contêm aquela string
-        function matcheBusca (candidato) {
-          if(candidato[1].toLowerCase().indexOf(filtro.toLowerCase()) !== -1 ) return true;
-         };
+        ajaxRequest.success(function(data, status, headers, config){
+          $scope.candidatos = data;
 
-        // Filtra dentro do array e retorn dentro da variável "matches" somente aqueles candidatos compativeis a string digitada
-        var matches = array.filter(matcheBusca);
+          // Transformando o retorno do requisição AJAX em Array
+          var array = $.map($scope.candidatos, function(value, index) {
+            return [value];
+          });
 
-        // Função de timeout que vai resolver e retornar os dados a cada instância de tempo
-        $timeout( function(){
-          deferred.resolve(matches);
-        }, 100);
-          return deferred.promise;
+
+          // Criando a busca de candidatos
+          var searchCandidatos = function(searchFilter) {
+            // Instnaciando variável de consulta Angular
+            var deferred = $q.defer();
+
+            // Função da busca que vai comparar cada letra se existe um candidato que contêm aquela string
+            function matcheBusca (candidato) {
+              if(candidato[1].toLowerCase().indexOf(filtro.toLowerCase()) !== -1 ) return true;
+             };
+
+            // Filtra dentro do array e retorn dentro da variável "matches" somente aqueles candidatos compativeis a string digitada
+            var matches = array.filter(matcheBusca);
+
+            // Função de timeout que vai resolver e retornar os dados a cada instância de tempo
+            $timeout( function(){
+              deferred.resolve(matches);
+            }, 100);
+              return deferred.promise;
+          }
+
+          // Função que vai jogar os encontrados dentro de uma variável "result"
+          searchCandidatos($scope.data.search).then(
+            function(matches){
+              $scope.data.result = matches;
+            }
+          );
+        });
       }
-
-      // Função que vai jogar os encontrados dentro de uma variável "result"
-      searchCandidatos($scope.data.search).then(
-        function(matches){
-          $scope.data.result = matches;
-        }
-      );
     });
-  });
 })
 .controller('PerfilCtrl', function($scope, $stateParams, $http) {
   $scope.perfil = [];
