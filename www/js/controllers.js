@@ -7,13 +7,7 @@ angular.module('starter.controllers', [])
   });
   $scope.estados = Estados.all();
 
-  document.addEventListener("deviceready", onDeviceReady, false);
-
-  function onDeviceReady() {
-    ListaHistorico.createDB();
-  }
-
-  
+  ListaHistorico.createDB();
 
   $scope.remove = function(estado) {
     Estados.remove(estado);
@@ -21,13 +15,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HistoricoCtrl', function($scope, ListaHistorico, $state, $ionicPopup, $http) {
-  document.addEventListener("deviceready", onDeviceReady, false);
-
-  function onDeviceReady() {
-    ListaHistorico.createDB();
-    $scope.load_historicos();
-  }
-
+  ListaHistorico.createDB();
   ListaHistorico.all().then(function (results) {
     $scope.historicos = results;
     $.each($scope.historicos, function(key, value){
@@ -42,7 +30,7 @@ angular.module('starter.controllers', [])
     });
   }
 
-
+  $scope.load_historicos();
 
   $scope.remover_historico = function(id){
     var confirmPopup = $ionicPopup.confirm({
@@ -218,11 +206,7 @@ angular.module('starter.controllers', [])
 
 .controller('QuizCtrl', function($scope, $stateParams, $http, $state, $ionicSlideBoxDelegate, ListaHistorico, $q, $rootScope, Estados) {
   // Abre banco de dados local
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-  function onDeviceReady() {
-    ListaHistorico.createDB();
-  }
+  ListaHistorico.createDB();
   // Função que escuta quando as respostas são alteradas para paginar ou marcar as páginações
   angular.element(document).ready(function(){
     jQuery(".item-radio").click(function(){
