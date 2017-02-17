@@ -5,9 +5,7 @@ angular.module('starter.services', [])
 
   function createDB(){
     try{
-      db = window.sqlitePlugin.openDatabase({name: "historico.db", createFromLocation: 1});
-      /*
-      db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);*/
+      db = openDatabase('historicoDB', '1.0', 'Histórico de consultas em quiz', 2 * 1024 * 1024);
       db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS historico (id INTEGER PRIMARY KEY ASC, id_cargo INTEGER, descricao_cargo varchar(20), estado varchar(25), estado_nome varchar(40), data_historico TEXT)');
       });
