@@ -143,6 +143,12 @@ angular.module('starter.services', [])
     }
   }
 
+  function destroy_resultados(id){
+   return promisedQuery("DELETE FROM historico_resultado where id_historico = " + id,
+    defaultResultHandler,
+    defaultErrorHandler); 
+  }
+
   function destroy_respostas(id){
    return promisedQuery("DELETE FROM historico_resposta where id_historico = " + id,
     defaultResultHandler,
@@ -151,6 +157,7 @@ angular.module('starter.services', [])
   
   function destroy(id){
    destroy_respostas(id);
+   destroy_resultados(id);
    return promisedQuery("DELETE FROM historico where id = " + id,
     defaultResultHandler,
     defaultErrorHandler);
