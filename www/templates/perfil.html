@@ -6,25 +6,37 @@
   	  </div>
   	  <div id="dados-principais-perfil">
   	    <h3>{{perfil.nome}}</h3>
-  	    <h4>{{perfil.cargo}}<span ng-if="perfil.estado != 'Federal'"> - {{perfil.estado}}</span></h4>
-  	    <h5>{{perfil.numero}} - {{perfil.partido}}</h5>
+  	    <h4>{{perfil.cargo}}<span ng-if="perfil.estado != 'Federal'"> - {{estado_candidato}}</span></h4>
+  	    <h4>{{perfil.numero}} - {{perfil.partido}}</h4>
   	  </div>
   	</div>
 	<div class="list">
 	  <div class="item item-divider">
         Dados Pessoais
       </div>
+      <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Coligações</span></b>
+	    <div style="background-color: white; white-space: normal; padding-top: 2px; height: 34px; color: #111; vertical-align: middle; font-size: 14px; line-height: 16px;">{{perfil.coligacao}}</div>
+	  </label>
 	  <label class="item item-input item-stacked-label">
 	  	<b><span class="input-label">Apelido</span></b>
 	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.apelido}}">
 	  </label>
 	  <label class="item item-input item-stacked-label">
 	  	<b><span class="input-label">Data de Nascimento</span></b>
-	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.dt_nascimento | date:'dd/MM/yyyy '}}">
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.dt_nascimento | date:'dd/MM/yyyy'}}">
 	  </label>
 	  <label class="item item-input item-stacked-label">
 	  	<b><span class="input-label">Nacionalidade</span></b>
 	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.nacionalidade}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Estado de Nascimento</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.uf_nasc}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Município de Nascimento</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.municipio_nasc}}">
 	  </label>
 	  <label class="item item-input item-stacked-label">
 	  	<b><span class="input-label">Grau de Instrução</span></b>
@@ -35,9 +47,21 @@
 	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.ocupacao}}">
 	  </label>
 	  <label class="item item-input item-stacked-label">
+	  	<b><span class="input-label">Cor/Raça</span></b>
+	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.cor_raca}}">
+	  </label>
+	  <label class="item item-input item-stacked-label">
 	  	<b><span class="input-label">Estado Civil</span></b>
 	    <input type="text" placeholder="Last Name" disabled="true" style="background-color: white;" value="{{perfil.est_civil}}">
 	  </label>
+	  <div class="item item-divider" ng-if="numero_vices > 0">
+        Vices e suplentes
+      </div>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="vice in vices" type="item-text-wrap" href="#/tab/perfil/{{vice[0]}}">
+          <img src="http://guiaeleitoral.esy.es/imagens/candidatos/candidatos/{{vice[2]}}">
+          <h2>{{vice[1]}}</h2>
+          <h3>{{vice[3]}} - {{vice[4]}}</h3>
+        </ion-item>
 	</div>
   </ion-content>
 </ion-view>

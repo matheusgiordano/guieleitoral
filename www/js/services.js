@@ -448,6 +448,14 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    getSigla: function(sigla) {
+      for (var i = 0; i < estados.length; i++) {
+        if (estados[i].sigla === sigla) {
+          return estados[i];
+        }
+      }
+      return null;
     }
   };
 });

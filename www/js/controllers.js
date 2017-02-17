@@ -486,13 +486,23 @@ angular.module('starter.controllers', [])
       }
     });
 })
-.controller('PerfilCtrl', function($scope, $stateParams, $http) {
+.controller('PerfilCtrl', function($scope, $stateParams, $http, Estados) {
   $scope.perfil = [];
 
   var ajaxRequest = $http.get("http://guiaeleitoral.esy.es/perfil.php?id="+$stateParams.candidato);
 
   ajaxRequest.success(function(data, status, headers, config){
     $scope.perfil = data;
+    $scope.estado_candidato = Estados.getSigla($scope.perfil.estado).nome;
+
+    $scope.vices = [];
+    var ajaxRequest_vices = $http.get("http://guiaeleitoral.esy.es/perfil_vices.php?id="+$scope.perfil.id + "&num=" + $scope.perfil.numero + "&estado=" + $scope.perfil.estado);
+
+    ajaxRequest_vices.success(function(data, status, headers, config){
+      $scope.vices = data;
+      $scope.numero_vices = Object.keys($scope.vices).length;
+    });
+
   });
 
 })
